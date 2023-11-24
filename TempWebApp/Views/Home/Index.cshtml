@@ -1,8 +1,176 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/site.css">
+
+    <title>Community News</title>
+
+   </head>
+  <body class="light-mode">
+
+    <header>
+        <img src="~/images/news.png" alt="Logo">
+        <h1>Community News</h1>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Trending</a>
+        <a href="#">Latest</a>
+        <a href="#">About Us</a>
+    </nav>
+
+    <button id="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+    <button id="create-post" onclick="createPost()">Create Post</button>
+
+    <section id="hero">
+        <div>
+            <h1 class="text">Welcome to Community News</h1>
+            <p class="text">
+                Stay updated with the latest news and trends in our community.</p>
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+    </section>
+
+    <section>
+        <article class="article">
+            <h2>Breaking News: Community Project Launch!</h2>
+
+
+              <p>In an exciting development that has sent ripples of anticipation
+                throughout our community, a groundbreaking project has been officially launched,
+                promising to reshape the way we connect, collaborate, and contribute to shared
+                endeavors. This innovative initiative marks a significant milestone in our
+                collective journey towards fostering unity, creativity, and positive change. </p>
+            <p><em>Published on: November 22, 2023</em></p>
+            <div class="social-buttons">
+                <a href="#" class="social-button"><i class="fa fa-comment"></i>Comment</a>
+                <a href="#" class="social-button">Read More</a>
+                <a href="#" class="social-button" onclick="shareButtonClick()"><i class="fa fa-share"></i> Share</a>
+            </div>
+        </article>
+        <article class="article">
+            <h2>Top Trends in Our Community</h2>
+            <p>As we navigate the dynamic landscape of our community, it's essentia
+                to stay attuned to the latest trends that shape our collective experience. Here's a
+                glimpse into the top trends currently making waves and influencing the way we
+                connect, collaborate, and engage with each other.</p>
+            <p><em>Published on: November 21, 2023</em></p>
+            <div class="social-buttons">
+                <a href="#" class="social-button"><i class="fa fa-comment"></i>Comment</a>
+                <a href="https://www.grazitti.com/blog/the-community-revolution-trends-to-look-out-for-in-2023/" target="blank" class="social-button">Read More</a>
+                <a href="#" class="social-button" onclick="shareButtonClick()"><i class="fa fa-share"></i> Share</a>
+
+            </div>
+        </article>
+    </section>
+
+    <section id="featured">
+        <article class="article">
+            <h2>Top Movies of the Month</h2>
+            <img src="~/images/Netflix.png" alt="Netflix Logo" class="logo-image">
+            <p>Embark on a cinematic journey with our carefully curated selection of
+                the 'Top Movies of the Month.' Immerse yourself in a world of captivating
+                storytelling, breathtaking visuals, and unforgettable performances. From thrilling
+                blockbusters to thought-provoking dramas, our collection showcases the best in film,
+                promising an unparalleled entertainment experience. Whether you're a fan of action,
+                romance, or suspense, discover the cinematic masterpieces that have captured the
+                hearts of audiences this month. Grab your popcorn, settle into your favorite spot,
+                and let the magic of these top movies transport you to new and exciting realms of
+                storytelling excellence.</p>
+            <div class="social-buttons">
+                <a href="#" class="social-button"><i class="fa fa-comment"></i>Comment</a>
+                <a href="https://www.netflix.com" target="blank" class="social-button">Open Netflix</a>
+                <a href="#" class="social-button" onclick="shareButtonClick()"><i class="fa fa-share"></i> Share</a>
+            </div>
+        </article>
+
+        <article class="article">
+            <h2>Top Music of the Month</h2>
+            <img src="~/images/spotify.png" alt="Spotify Logo" class="logo-image">
+            <p>Indulge your senses in the rhythm and melody of our 'Top Music of the
+                Month' collection. Uncover the latest chart-toppers, hidden gems, and musical
+                sensations that have been making waves in the past month. From pulsating beats to
+                soul-stirring lyrics, our carefully curated playlist spans genres to cater to every
+                musical palate. Whether you're a fan of upbeat pop, soulful ballads, or energetic
+                rock, our selection promises to keep you in tune with the hottest sounds of the
+                moment. Join us on a sonic journey where every track is a masterpiece, and discover
+                the musical magic that has been setting the tone for this month's unforgettable
+                moments.</p>
+            <div class="social-buttons">
+                <a href="#" class="social-button"><i class="fa fa-comment"></i>Comment</a>
+                <a href="https://open.spotify.com" target="blank" class="social-button">Open Spotify</a>
+                <a href="#" class="social-button" onclick="shareButtonClick()"><i class="fa fa-share"></i> Share</a>
+
+            </div>
+        </article>
+    </section>
+
+    <section class="comments-section" id="comments-section">
+        <h2>Comments</h2>
+        <div id="comments-container"></div>
+
+        <div class="comment-form">
+            <textarea id="comment-text" placeholder="Add a comment or Suggestion"></textarea>
+            <button onclick="addComment()">Post</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Community News. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle("dark-mode");
+
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            darkModeToggle.textContent = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+        }
+
+        function createPost() {
+
+            if (!isUserSignedIn()) {
+                alert("Please sign up to create a post.");
+                return;
+            }
+            alert("Post created successfully!");
+        }
+        function isUserSignedIn() { 
+            return confirm("Are you signed in?");
+        }
+        function addComment() {
+            const commentText = document.getElementById('comment-text').value;
+
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            commentElement.textContent = commentText;
+
+            const commentsContainer = document.getElementById('comments-container');
+            commentsContainer.appendChild(commentElement);
+
+            document.getElementById('comment-text').value = '';
+        }
+        function shareButtonClick() {
+
+            const userMessage = prompt("Say something about this:", "I'm sharing something interesting!");
+
+            if (userMessage !== null) {
+                console.log("User shared:", userMessage);
+            }
+        }
+
+    </script>
+
+</body>
+</html>
