@@ -6,6 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+IConfigurationRoot Configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
+
 // Get the connection string from the environment variable
 var connectionString = Environment.GetEnvironmentVariable("CommunityConnection");
 
