@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Core.Community
 {
-    public class ThreadComment
+    public class BlogComment
     {
-        public int ThreadCommentId { get; set; }
-        public int ThreadId { get; set; }
+        public int BlogCommentId { get; set; }
+        public int BlogId { get; set; }
 
     }
 }
