@@ -17,7 +17,7 @@ var connectionString = Environment.GetEnvironmentVariable("CommunityConnection")
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 35));//*********There might be a way to detect automatically
                                                                   //(like "ServerVersion.AutoDetect") but I couldn't figure it out
 
-// Configure the DbContext with the connection string and server version
+// Configure the DbContext with the connection string
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseMySql(connectionString, serverVersion));
 

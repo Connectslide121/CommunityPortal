@@ -5,7 +5,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Community
+namespace Core.CommunityClasses
 {
     public enum BlogCategory
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.User
+namespace Core.UserClasses
 {
     public class User
     {
