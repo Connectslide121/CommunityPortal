@@ -16,7 +16,7 @@ namespace Core.CommunityClasses
         Books = 4,
         FunnyImages = 5,
         FunnyClips = 6,
-        Category7 = 7,
+        Music = 7,
         Category8 = 8,
         Category9 = 9
     }
