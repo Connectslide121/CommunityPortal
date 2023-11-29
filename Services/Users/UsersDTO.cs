@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBaseConnection
+namespace Services.Users
 {
-    public interface IDataConnection
+    public class UsersDTO
     {
 
     }

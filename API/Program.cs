@@ -1,5 +1,6 @@
 using DataBaseConnection;
 using Microsoft.EntityFrameworkCore;
+using Services.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,8 +30,8 @@ var serverVersion = new MySqlServerVersion(new Version(8, 0, 35));//*********The
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseMySql(connectionString, serverVersion));
 
-//Connect IDataConnection to DataConnectionfi
-builder.Services.AddScoped<IDataConnection, DataConnection>();
+//Connect IDataService to DataService
+builder.Services.AddScoped<IUsersService, UsersService>();
 
 
 
