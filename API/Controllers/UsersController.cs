@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services;
+using Services.DTOs;
 using Services.Interfaces;
 
 namespace API.Controllers
@@ -19,7 +20,7 @@ namespace API.Controllers
 
 
         [HttpGet("GetUsers")]
-        public List<User> GetUsers() 
+        public List<UserDTO> GetUsers() 
         { 
             return _usersService.GetUsers();
         }

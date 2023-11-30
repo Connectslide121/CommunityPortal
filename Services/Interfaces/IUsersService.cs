@@ -1,4 +1,5 @@
 ﻿using Core.UserClasses;
+using Services.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Services.Interfaces
 {
     public interface IUsersService
     {
-        List<User> GetUsers();
+        List<UserDTO> GetUsers();
         List<Guest> GetGuests();
         List<Admin> GetAdmins();
         List<Moderator> GetModerators();

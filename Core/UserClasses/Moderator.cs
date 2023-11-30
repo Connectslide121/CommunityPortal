@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace Core.UserClasses
 {
+    public enum ModerationArea
+    {
+        Uncategorized = 0,
+        News = 1,
+        Community = 2
+    }
+
     public class Moderator : User
     {
-        public enum ModerationArea { News, Community }
+        public ModerationArea ModerationArea { get; set; }
         public int ModerationExperience { get; set; } //based on moderation activity
 
     }
