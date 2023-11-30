@@ -22,7 +22,7 @@ namespace API.Controllers
 
 
         [HttpGet("GetPosts")]
-        public List<PostsPostDTO> GetPosts()
+        public List<PostDTO> GetPosts()
         {
             return _postsService.GetPosts();           
         }

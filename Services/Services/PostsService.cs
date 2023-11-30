@@ -23,7 +23,7 @@ namespace Services.Services
             _dataContext = dataContext;
         }
 
-        public List<PostsPostDTO> GetPosts()
+        public List<PostDTO> GetPosts()
         { 
              List<Post> posts = _dataContext.Posts
                 .Include(p => p.User)
@@ -32,13 +32,13 @@ namespace Services.Services
             return MapPostsToPostDTOs(posts);
         }
 
-        private List<PostsPostDTO> MapPostsToPostDTOs(List<Post> posts)
+        private List<PostDTO> MapPostsToPostDTOs(List<Post> posts)
         {
-            List<PostsPostDTO> postDTOs = new List<PostsPostDTO>();
+            List<PostDTO> postDTOs = new List<PostDTO>();
 
             foreach (Post post in posts)
             {
-                PostsPostDTO postDTO = new PostsPostDTO
+                PostDTO postDTO = new PostDTO
                 {
                     PostId = post.PostId,
                     User = MapUserToUserDTO(post.User),
@@ -66,9 +66,9 @@ namespace Services.Services
             return postDTOs;
         }
 
-        private PostsUserDTO MapUserToUserDTO(User user)
+        private UserDTO MapUserToUserDTO(User user)
         {
-            PostsUserDTO userDTO = new PostsUserDTO
+            UserDTO userDTO = new UserDTO
             {
                 UserId = user.UserId,
                 UserName = user.UserName,

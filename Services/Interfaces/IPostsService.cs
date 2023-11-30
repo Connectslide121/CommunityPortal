@@ -12,7 +12,7 @@ namespace Services.Interfaces
 {
     public interface IPostsService
     {
-        List<PostsPostDTO> GetPosts();
+        List<PostDTO> GetPosts();
         List<Blog> GetBlogs();
         List<News> GetNews();
     }

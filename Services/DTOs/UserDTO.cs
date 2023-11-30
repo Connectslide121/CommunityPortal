@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Services.DTOs
 {
-    public class PostsUserDTO
+    public class UserDTO
     {
         public int UserId { get; set; }
         public string UserName { get; set; }
@@ -15,10 +15,13 @@ namespace Services.DTOs
         public string Email { get; set; }
         public string ProfilePicturePath { get; set; }
         public string Description { get; set; }
+        public List<PostDTO> PostHistory { get; set; }
         public int UserExperience { get; set; } //Guest
         public string AdminTitle { get; set; } //Admin
         public int AdminPrivilegeLevel { get; set; } //Admin
         public ModerationArea ModerationArea { get; set; } //Moderator
         public int ModerationExperience { get; set; } //Moderator
+
+
     }
 }

@@ -20,7 +20,7 @@ namespace API.Controllers
 
 
         [HttpGet("GetUsers")]
-        public List<UsersUserDTO> GetUsers() 
+        public List<UserDTO> GetUsers() 
         { 
             return _usersService.GetUsers();
         }
