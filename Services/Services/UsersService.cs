@@ -23,22 +23,22 @@ namespace Services.Services
             _dataContext = dataContext;
         }
 
-        public List<UserDTO> GetUsers()
+        public List<UsersUserDTO> GetUsers()
         {
             List<User> users = _dataContext.Users
                 .Include(u => u.PostHistory)
                 .ToList();
 
-            return MapUserToUserDTO(users);
+            return MapUsersToUserDTOs(users);
         }
 
-        private List<UserDTO> MapUserToUserDTO(List<User> users)
+        private List<UsersUserDTO> MapUsersToUserDTOs(List<User> users)
         {
-            List<UserDTO> userDTOs = new List<UserDTO>();
+            List<UsersUserDTO> userDTOs = new List<UsersUserDTO>();
 
             foreach (User user in users) 
             {
-                UserDTO userDTO = new UserDTO
+                UsersUserDTO userDTO = new UsersUserDTO
                 {
                     UserId = user.UserId,
                     UserName = user.UserName,
@@ -46,7 +46,7 @@ namespace Services.Services
                     Email = user.Email,
                     ProfilePicturePath = user.ProfilePicturePath,
                     Description = user.Description,
-                    PostHistory = MapPostToPostDTO(user.PostHistory)
+                    PostHistory = MapPostsToPostDTOs(user.PostHistory)
                 };
 
                 if (user is Guest guest)
@@ -72,13 +72,13 @@ namespace Services.Services
             return userDTOs;
         }
 
-        private List<PostDTO> MapPostToPostDTO(List<Post> posts)
+        private List<UsersPostDTO> MapPostsToPostDTOs(List<Post> posts)
         {
-            List<PostDTO> postDTOs = new List<PostDTO>();
+            List<UsersPostDTO> postDTOs = new List<UsersPostDTO>();
 
             foreach (Post post in posts)
             {
-                PostDTO postDTO = new PostDTO
+                UsersPostDTO postDTO = new UsersPostDTO
                 {
                     PostId = post.PostId,
                     Content = post.Content,

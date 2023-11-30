@@ -4,6 +4,7 @@ using Core.NewsClasses;
 using Core.UserClasses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Services.DTOs;
 using Services.Interfaces;
 
 namespace API.Controllers
@@ -21,7 +22,7 @@ namespace API.Controllers
 
 
         [HttpGet("GetPosts")]
-        public List<Post> GetPosts()
+        public List<PostsPostDTO> GetPosts()
         {
             return _postsService.GetPosts();           
         }

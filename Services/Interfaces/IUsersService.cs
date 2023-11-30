@@ -10,7 +10,7 @@ namespace Services.Interfaces
 {
     public interface IUsersService
     {
-        List<UserDTO> GetUsers();
+        List<UsersUserDTO> GetUsers();
         List<Guest> GetGuests();
         List<Admin> GetAdmins();
         List<Moderator> GetModerators();
