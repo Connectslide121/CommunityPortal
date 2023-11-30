@@ -1,6 +1,8 @@
 using DataBaseConnection;
 using Microsoft.EntityFrameworkCore;
-using Services.Users;
+using Services;
+using Services.Interfaces;
+using Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 //Connect IDataService to DataService
 builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IPostsService, PostsService>();
+
 
 
 

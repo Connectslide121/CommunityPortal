@@ -1,7 +1,8 @@
 ﻿using Core.UserClasses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Services.Users;
+using Services;
+using Services.Interfaces;
 
 namespace API.Controllers
 {
@@ -17,10 +18,28 @@ namespace API.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("GetUsers")]
         public List<User> GetUsers() 
         { 
             return _usersService.GetUsers();
+        }
+
+        [HttpGet("GetGuests")]
+        public List<Guest> GetGuests() 
+        { 
+            return _usersService.GetGuests();
+        }
+
+        [HttpGet("GetAdmins")]
+        public List<Admin> GetAdmins() 
+        { 
+            return _usersService.GetAdmins();
+        }
+
+        [HttpGet("GetModerators")]
+        public List<Moderator> GetModerators() 
+        { 
+            return _usersService.GetModerators();
         }
     }
 }

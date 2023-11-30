@@ -1,13 +1,14 @@
 ﻿using Core.UserClasses;
 using DataBaseConnection;
 using Microsoft.EntityFrameworkCore;
+using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Users
+namespace Services.Services
 {
     public class UsersService : IUsersService
     {
@@ -21,6 +22,24 @@ namespace Services.Users
         public List<User> GetUsers()
         {
             return _dataContext.Users
+                .ToList();
+        }
+
+        public List<Guest> GetGuests()
+        {
+            return _dataContext.Guests
+                .ToList();
+        }
+
+        public List<Admin> GetAdmins() 
+        {
+            return _dataContext.Admins
+                .ToList();
+        }
+
+        public List<Moderator> GetModerators()
+        {
+            return _dataContext.Moderators
                 .ToList();
         }
     }
