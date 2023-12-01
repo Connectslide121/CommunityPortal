@@ -192,6 +192,7 @@ namespace Services.Mappers
         {
             BlogDTO blogDTO = new BlogDTO
             {
+                PostId = blog.PostId,
                 BlogId = blog.BlogId,
                 BlogTitle = blog.Title,
                 Content = blog.Content,
@@ -205,6 +206,7 @@ namespace Services.Mappers
         {
             NewsDTO newsDTO = new NewsDTO
             {
+                PostId = news.PostId,
                 NewsId = news.NewsId,
                 NewsTitle = news.Title,
                 Content = news.Content,
@@ -246,7 +248,7 @@ namespace Services.Mappers
                 {
                     BlogCommentId = comment.BlogCommentId,
                     Comment = comment.Comment,
-                    //Blog = MapBlogToBlogDTO(comment.Blog)**************************************************************************************
+                    Blog = MapBlogToBlogDTO(comment.Blog)
                 };
 
                 commentsDTO.Add(commentDTO);
@@ -265,7 +267,7 @@ namespace Services.Mappers
                 {
                     NewsCommentId = comment.NewsCommentId,
                     Comment = comment.Comment,
-                    //News = MapNewsToNewsDTO(comment.News)**************************************************************************************
+                    News = MapNewsToNewsDTO(comment.News)
                 };
 
                 commentsDTO.Add(commentDTO);

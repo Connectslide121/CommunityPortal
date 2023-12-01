@@ -45,7 +45,11 @@ namespace Services.Services
                 .Include(g => g.PostHistory)
                 .Include(g => g.EventsAttended)
                 .Include(g => g.BlogComments)
+                    .ThenInclude(c => c.Blog)
+                        .ThenInclude(b => b.User)
                 .Include(g => g.NewsComments)
+                    .ThenInclude(c => c.News)
+                        .ThenInclude(n => n.User)
                 .ToList();
 
             return _mapper.MapGuestsToGuestDTOs(guests);
@@ -57,7 +61,11 @@ namespace Services.Services
                 .Include(a => a.PostHistory)
                 .Include(a => a.EventsAttended)
                 .Include(a => a.BlogComments)
+                    .ThenInclude(c => c.Blog)
+                        .ThenInclude(b => b.User)
                 .Include(a => a.NewsComments)
+                    .ThenInclude(c => c.News)
+                        .ThenInclude(n => n.User)
                 .ToList();
 
             return _mapper.MapAdminsToAdminDTOs(admins);
@@ -69,7 +77,11 @@ namespace Services.Services
                 .Include(m => m.PostHistory)
                 .Include(m => m.EventsAttended)
                 .Include(m => m.BlogComments)
+                    .ThenInclude(c => c.Blog)
+                        .ThenInclude(b => b.User)
                 .Include(m => m.NewsComments)
+                    .ThenInclude(c => c.News)
+                        .ThenInclude(n => n.User)
                 .ToList();
 
             return _mapper.MapModeratorsToModeratorDTOs(moderators);
