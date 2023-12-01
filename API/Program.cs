@@ -35,6 +35,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 //Connect IDataService to DataService
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IPostsService, PostsService>();
+builder.Services.AddScoped<IEventsService, EventsService>();
 
 
 

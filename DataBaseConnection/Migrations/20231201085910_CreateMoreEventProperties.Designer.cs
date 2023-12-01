@@ -3,6 +3,7 @@ using System;
 using DataBaseConnection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataBaseConnection.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231201085910_CreateMoreEventProperties")]
+    partial class CreateMoreEventProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,6 +129,9 @@ namespace DataBaseConnection.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("EventId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -141,24 +146,11 @@ namespace DataBaseConnection.Migrations
 
                     b.HasKey("UserId");
 
+                    b.HasIndex("EventId");
+
                     b.ToTable("Users");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
-            modelBuilder.Entity("EventUser", b =>
-                {
-                    b.Property<int>("AttendantsUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EventsAttendedEventId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AttendantsUserId", "EventsAttendedEventId");
-
-                    b.HasIndex("EventsAttendedEventId");
-
-                    b.ToTable("EventUser");
                 });
 
             modelBuilder.Entity("Core.CommunityClasses.Blog", b =>
@@ -267,19 +259,16 @@ namespace DataBaseConnection.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EventUser", b =>
+            modelBuilder.Entity("Core.UserClasses.User", b =>
                 {
-                    b.HasOne("Core.UserClasses.User", null)
-                        .WithMany()
-                        .HasForeignKey("AttendantsUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Core.NewsClasses.Event", null)
-                        .WithMany()
-                        .HasForeignKey("EventsAttendedEventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Attendants")
+                        .HasForeignKey("EventId");
+                });
+
+            modelBuilder.Entity("Core.NewsClasses.Event", b =>
+                {
+                    b.Navigation("Attendants");
                 });
 
             modelBuilder.Entity("Core.UserClasses.User", b =>

@@ -28,6 +28,7 @@ namespace Services.Services
         {
             List<User> users = _dataContext.Users
                 .Include(u => u.PostHistory)
+                .Include(u => u.EventsAttended)
                 .ToList();
 
             return MapUsersToUserDTOs(users);
@@ -47,7 +48,8 @@ namespace Services.Services
                     Email = user.Email,
                     ProfilePicturePath = user.ProfilePicturePath,
                     Description = user.Description,
-                    PostHistory = MapPostsToPostDTOs(user.PostHistory)
+                    PostHistory = MapPostsToPostDTOs(user.PostHistory),
+                    EventsAttended = MapEventsToEventDTOs(user.EventsAttended)
                 };
 
                 if (user is Guest guest)
@@ -106,6 +108,27 @@ namespace Services.Services
             return postDTOs;
         }
 
+        private List<EventDTO> MapEventsToEventDTOs(List<Event> events)
+        {
+            List<EventDTO> eventDTOs = new List<EventDTO>();
+
+            foreach (Event evnt in events)
+            {
+                EventDTO eventDTO = new EventDTO
+                {
+                    EventId = evnt.EventId,
+                    Title = evnt.Title,
+                    Description = evnt.Description,
+                    Location = evnt.Location,
+                    StartTime = evnt.StartTime,
+                    EndTime = evnt.EndTime,
+                };
+
+                eventDTOs.Add(eventDTO);
+            }
+
+            return eventDTOs;
+        }
 
         public List<GuestDTO> GetGuests()
         {

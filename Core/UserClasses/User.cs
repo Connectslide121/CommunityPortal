@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.NewsClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,6 @@ namespace Core.UserClasses
         public string ProfilePicturePath { get; set; }
         public string Description { get; set; }
         public List<Post> PostHistory { get; set; }
+        public List<Event> EventsAttended { get; set; }
     }
 }

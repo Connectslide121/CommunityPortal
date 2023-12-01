@@ -1,4 +1,5 @@
-﻿using Core.UserClasses;
+﻿using Core.NewsClasses;
+using Core.UserClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Services.DTOs
         public string Email { get; set; }
         public string ProfilePicturePath { get; set; }
         public string Description { get; set; }
+        public List<EventDTO> EventsAttended { get; set; }
         public List<PostDTO> PostHistory { get; set; }
         public int UserExperience { get; set; } //Guest
         public string AdminTitle { get; set; } //Admin

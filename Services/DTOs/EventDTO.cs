@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.NewsClasses
+namespace Services.DTOs
 {
-    public class Event
+    public class EventDTO
     {
         public int EventId { get; set; }
         public string Title { get; set; }
@@ -15,6 +15,6 @@ namespace Core.NewsClasses
         public string Location { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public List<User> Attendants { get; set; }
+        public List<UserDTO> Attendants { get; set; }
     }
 }
