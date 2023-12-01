@@ -17,9 +17,11 @@ namespace Services.DTOs
         public int BlogId { get; set; } //Blog
         public string BlogTitle { get; set; } //Blog
         public BlogCategory BlogCategory { get; set; } //Blog
+        public List<BlogCommentDTO> BlogComments { get; set; } //Blog
         public int NewsId { get; set; } //News
         public string NewsTitle { get; set; } //News
         public NewsCategory NewsCategory { get; set; } //News
+        public List <NewsCommentDTO> NewsComments { get; set; } //News
 
     }
 }

@@ -17,6 +17,7 @@ namespace Services.DTOs
         public int NewsId { get; set; } //News
         public string NewsTitle { get; set; } //News
         public NewsCategory NewsCategory { get; set; } //News
+        public List<NewsCommentDTO> NewsComments { get; set; } //News
 
     }
 }

@@ -32,6 +32,7 @@ namespace Services.Mappers
                     postDTO.BlogId = blog.BlogId;
                     postDTO.BlogTitle = blog.Title;
                     postDTO.BlogCategory = blog.Category;
+                    postDTO.BlogComments = MapBlogCommentsToBlogCommentDTOs(blog.BlogComments);
                 }
 
                 else if (post is News news)
@@ -39,6 +40,7 @@ namespace Services.Mappers
                     postDTO.NewsId = news.NewsId;
                     postDTO.NewsTitle = news.Title;
                     postDTO.NewsCategory = news.Category;
+                    postDTO.NewsComments = MapNewsCommentsToNewsCommentDTOs(news.NewsComments);
                 }
 
                 postDTOs.Add(postDTO);
@@ -96,11 +98,31 @@ namespace Services.Mappers
                 blogDTO.BlogId = blog.BlogId;
                 blogDTO.BlogTitle = blog.Title;
                 blogDTO.BlogCategory = blog.Category;
+                blogDTO.BlogComments = MapBlogCommentsToBlogCommentDTOs(blog.BlogComments);
 
                 blogDTOs.Add(blogDTO);
             }
 
             return blogDTOs;
+        }
+
+        public List<BlogCommentDTO> MapBlogCommentsToBlogCommentDTOs(List<BlogComment> comments)
+        {
+            List<BlogCommentDTO> blogCommentDTOs = new List<BlogCommentDTO>();
+
+            foreach (BlogComment comment in comments)
+            {
+                BlogCommentDTO blogCommentDTO = new BlogCommentDTO
+                {
+                    BlogCommentId = comment.BlogCommentId,
+                    Comment = comment.Comment,
+                    User = MapUserToUserDTO(comment.User)
+                };
+
+                blogCommentDTOs.Add(blogCommentDTO);
+            }
+
+            return blogCommentDTOs;
         }
 
         public List<NewsDTO> MapNewsToNewsDTOs(List<News> newsList)
@@ -120,11 +142,31 @@ namespace Services.Mappers
                 newsDTO.NewsId = news.NewsId;
                 newsDTO.NewsTitle = news.Title;
                 newsDTO.NewsCategory = news.Category;
+                newsDTO.NewsComments = MapNewsCommentsToNewsCommentDTOs(news.NewsComments);
 
                 newsDTOs.Add(newsDTO);
             }
 
             return newsDTOs;
+        }
+
+        public List<NewsCommentDTO> MapNewsCommentsToNewsCommentDTOs(List<NewsComment> comments)
+        {
+            List<NewsCommentDTO> newsCommentDTOs = new List<NewsCommentDTO>();
+
+            foreach (NewsComment comment in comments)
+            {
+                NewsCommentDTO commentDTO = new NewsCommentDTO
+                {
+                    NewsCommentId = comment.NewsCommentId,
+                    Comment = comment.Comment,
+                    User = MapUserToUserDTO(comment.User)
+                };
+
+                newsCommentDTOs.Add(commentDTO);
+            }
+
+            return newsCommentDTOs;
         }
 
     }
