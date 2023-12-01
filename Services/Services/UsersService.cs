@@ -39,6 +39,19 @@ namespace Services.Services
             return _mapper.MapUsersToUserDTOs(users);
         }
 
+        public UserDTO GetUserById(int userId) //******************************************Handle NULL exception????? make sure that this ID always exists.
+        {
+            User? user = _dataContext.Users
+               .Where(u => u.UserId == userId)
+               .Include(u => u.PostHistory)
+               .Include(u => u.EventsAttended)
+               .Include(u => u.BlogComments)
+               .Include(u => u.NewsComments)
+               .FirstOrDefault();
+
+            return _mapper.MapUserToUserDTO(user);
+        }
+
         public List<GuestDTO> GetGuests()
         {
             List<Guest> guests = _dataContext.Guests
