@@ -26,19 +26,19 @@ namespace API.Controllers
         }
 
         [HttpGet("GetGuests")]
-        public List<Guest> GetGuests() 
+        public List<GuestDTO> GetGuests() 
         { 
             return _usersService.GetGuests();
         }
 
         [HttpGet("GetAdmins")]
-        public List<Admin> GetAdmins() 
+        public List<AdminDTO> GetAdmins() 
         { 
             return _usersService.GetAdmins();
         }
 
         [HttpGet("GetModerators")]
-        public List<Moderator> GetModerators() 
+        public List<ModeratorDTO> GetModerators() 
         { 
             return _usersService.GetModerators();
         }

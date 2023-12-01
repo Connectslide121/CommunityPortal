@@ -11,8 +11,8 @@ namespace Services.Interfaces
     public interface IUsersService
     {
         List<UserDTO> GetUsers();
-        List<Guest> GetGuests();
-        List<Admin> GetAdmins();
-        List<Moderator> GetModerators();
+        List<GuestDTO> GetGuests();
+        List<AdminDTO> GetAdmins();
+        List<ModeratorDTO> GetModerators();
     }
 }
