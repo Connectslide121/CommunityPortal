@@ -9,6 +9,7 @@ using Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -98,19 +99,70 @@ namespace Services.Services
             return userDTO;
         }
 
-
-
-
-        public List<Blog> GetBlogs()
+        public List<BlogDTO> GetBlogs()
         {
-            return _dataContext.Blogs
+            List<Blog> blogs = _dataContext.Blogs
+                .Include(b => b.User)
                 .ToList();
+
+            return MapBlogsToBlogDTOs(blogs);
         }
 
-        public List<News> GetNews()
+        private List<BlogDTO> MapBlogsToBlogDTOs(List<Blog> blogs)
         {
-            return _dataContext.News
+            List<BlogDTO> blogDTOs = new List<BlogDTO>();
+
+            foreach (Blog blog in blogs)
+            {
+                BlogDTO blogDTO = new BlogDTO
+                {
+                    PostId = blog.PostId,
+                    User = MapUserToUserDTO(blog.User),
+                    Content = blog.Content,
+                    Timestamp = blog.Timestamp
+                };
+
+                    blogDTO.BlogId = blog.BlogId;
+                    blogDTO.BlogTitle = blog.Title;
+                    blogDTO.BlogCategory = blog.Category;
+
+                blogDTOs.Add(blogDTO);
+            }
+
+            return blogDTOs;
+        }
+
+        public List<NewsDTO> GetNews()
+        {
+            List<News> news = _dataContext.News
+                .Include(n => n.User)
                 .ToList();
+
+            return MapNewsToNewsDTOs(news);
+        }
+
+        private List<NewsDTO> MapNewsToNewsDTOs(List<News> newsList)
+        {
+            List<NewsDTO> newsDTOs = new List<NewsDTO>();
+
+            foreach (News news in newsList)
+            {
+                NewsDTO newsDTO = new NewsDTO
+                {
+                    PostId = news.PostId,
+                    User = MapUserToUserDTO(news.User),
+                    Content = news.Content,
+                    Timestamp = news.Timestamp
+                };
+
+                    newsDTO.NewsId = news.NewsId;
+                    newsDTO.NewsTitle = news.Title;
+                    newsDTO.NewsCategory = news.Category;
+
+                newsDTOs.Add(newsDTO);
+            }
+
+            return newsDTOs;
         }
     }
 }

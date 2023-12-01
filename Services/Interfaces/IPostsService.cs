@@ -13,7 +13,7 @@ namespace Services.Interfaces
     public interface IPostsService
     {
         List<PostDTO> GetPosts();
-        List<Blog> GetBlogs();
-        List<News> GetNews();
+        List<BlogDTO> GetBlogs();
+        List<NewsDTO> GetNews();
     }
 }

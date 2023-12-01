@@ -28,13 +28,13 @@ namespace API.Controllers
         }
 
         [HttpGet("GetBlogs")]
-        public List<Blog> GetBlogs()
+        public List<BlogDTO> GetBlogs()
         {
             return _postsService.GetBlogs();
         }
 
         [HttpGet("GetNews")]
-        public List<News> GetNews()
+        public List<NewsDTO> GetNews()
         {
             return _postsService.GetNews();
         }
