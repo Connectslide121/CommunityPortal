@@ -1,17 +1,18 @@
-﻿using Core.UserClasses;
+﻿using Core.NewsClasses;
+using Core.UserClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.NewsClasses
+namespace Services.DTOs
 {
-    public class NewsComment
+    public class NewsCommentDTO
     {
         public int NewsCommentId { get; set; }
         public string Comment { get; set; }
-        public News News { get; set; }
-        public User User { get; set; }
+        public NewsDTO News { get; set; }
+        public UserDTO User { get; set; }
     }
 }

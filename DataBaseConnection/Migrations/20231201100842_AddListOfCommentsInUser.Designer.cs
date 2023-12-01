@@ -3,6 +3,7 @@ using System;
 using DataBaseConnection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataBaseConnection.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231201100842_AddListOfCommentsInUser")]
+    partial class AddListOfCommentsInUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,11 +30,7 @@ namespace DataBaseConnection.Migrations
                     b.Property<int>("BlogPostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("BlogCommentId");
@@ -79,14 +77,10 @@ namespace DataBaseConnection.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<int>("NewsPostId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("NewsCommentId");
@@ -260,15 +254,11 @@ namespace DataBaseConnection.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.UserClasses.User", "User")
+                    b.HasOne("Core.UserClasses.User", null)
                         .WithMany("BlogComments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Blog");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Core.NewsClasses.NewsComment", b =>
@@ -279,15 +269,11 @@ namespace DataBaseConnection.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.UserClasses.User", "User")
+                    b.HasOne("Core.UserClasses.User", null)
                         .WithMany("NewsComments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("News");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Core.Post", b =>

@@ -7,6 +7,7 @@ using DataBaseConnection.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Services.DTOs;
 using Services.Interfaces;
+using Services.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,12 @@ namespace Services.Services
     public class UsersService : IUsersService
     {
         private readonly DataContext _dataContext;
+        private UserServiceMappers _mapper;
 
         public UsersService(DataContext dataContext)
         {
             _dataContext = dataContext;
+            _mapper = new UserServiceMappers();
         }
 
         public List<UserDTO> GetUsers()
@@ -29,208 +32,47 @@ namespace Services.Services
             List<User> users = _dataContext.Users
                 .Include(u => u.PostHistory)
                 .Include(u => u.EventsAttended)
+                .Include(u => u.BlogComments)
+                .Include(u => u.NewsComments)
                 .ToList();
 
-            return MapUsersToUserDTOs(users);
-        }
-
-        private List<UserDTO> MapUsersToUserDTOs(List<User> users)
-        {
-            List<UserDTO> userDTOs = new List<UserDTO>();
-
-            foreach (User user in users) 
-            {
-                UserDTO userDTO = new UserDTO
-                {
-                    UserId = user.UserId,
-                    UserName = user.UserName,
-                    Password = user.Password,
-                    Email = user.Email,
-                    ProfilePicturePath = user.ProfilePicturePath,
-                    Description = user.Description,
-                    PostHistory = MapPostsToPostDTOs(user.PostHistory),
-                    EventsAttended = MapEventsToEventDTOs(user.EventsAttended)
-                };
-
-                if (user is Guest guest)
-                {
-                    userDTO.UserExperience = guest.UserExperience;
-                }
-
-                else if (user is Admin admin)
-                {
-                    userDTO.AdminTitle = admin.AdminTitle;
-                    userDTO.AdminPrivilegeLevel = admin.AdminPrivilegeLevel;
-                }
-
-                else if (user is Moderator moderator)
-                {
-                    userDTO.ModerationExperience = moderator.ModerationExperience;
-                    userDTO.ModerationArea = moderator.ModerationArea;
-                }
-
-                userDTOs.Add(userDTO);
-            }
-
-            return userDTOs;
-        }
-
-        private List<PostDTO> MapPostsToPostDTOs(List<Post> posts)
-        {
-            List<PostDTO> postDTOs = new List<PostDTO>();
-
-            foreach (Post post in posts)
-            {
-                PostDTO postDTO = new PostDTO
-                {
-                    PostId = post.PostId,
-                    Content = post.Content,
-                    Timestamp = post.Timestamp
-                };
-
-                if (post is Blog blog)
-                {
-                    postDTO.BlogId = blog.BlogId;
-                    postDTO.BlogTitle = blog.Title;
-                    postDTO.BlogCategory = blog.Category;
-                }
-
-                if (post is News news)
-                {
-                    postDTO.NewsId = news.NewsId;
-                    postDTO.NewsTitle = news.Title;
-                    postDTO.NewsCategory = news.Category;
-                }
-
-                postDTOs.Add(postDTO);
-            }
-        
-            return postDTOs;
-        }
-
-        private List<EventDTO> MapEventsToEventDTOs(List<Event> events)
-        {
-            List<EventDTO> eventDTOs = new List<EventDTO>();
-
-            foreach (Event evnt in events)
-            {
-                EventDTO eventDTO = new EventDTO
-                {
-                    EventId = evnt.EventId,
-                    Title = evnt.Title,
-                    Description = evnt.Description,
-                    Location = evnt.Location,
-                    StartTime = evnt.StartTime,
-                    EndTime = evnt.EndTime,
-                };
-
-                eventDTOs.Add(eventDTO);
-            }
-
-            return eventDTOs;
+            return _mapper.MapUsersToUserDTOs(users);
         }
 
         public List<GuestDTO> GetGuests()
         {
             List<Guest> guests = _dataContext.Guests
                 .Include(g => g.PostHistory)
+                .Include(g => g.EventsAttended)
+                .Include(g => g.BlogComments)
+                .Include(g => g.NewsComments)
                 .ToList();
 
-            return MapGuestsToGuestDTOs(guests);
+            return _mapper.MapGuestsToGuestDTOs(guests);
         }
-
-
-        private List<GuestDTO> MapGuestsToGuestDTOs (List<Guest> guests)
-        {
-            List<GuestDTO> guestDTOs = new List<GuestDTO>();
-
-            foreach (Guest guest in guests)
-            {
-                GuestDTO guestDTO = new GuestDTO
-                {
-                    UserId = guest.UserId,
-                    UserName = guest.UserName,
-                    Password = guest.Password,
-                    Email = guest.Email,
-                    ProfilePicturePath = guest.ProfilePicturePath,
-                    Description = guest.Description,
-                    PostHistory = MapPostsToPostDTOs(guest.PostHistory)
-                };
-                    guestDTO.UserExperience = guest.UserExperience;
-
-                guestDTOs.Add(guestDTO);
-            }
-
-            return guestDTOs;
-        }
-
 
         public List<AdminDTO> GetAdmins() 
         {
             List<Admin> admins = _dataContext.Admins
                 .Include(a => a.PostHistory)
+                .Include(a => a.EventsAttended)
+                .Include(a => a.BlogComments)
+                .Include(a => a.NewsComments)
                 .ToList();
 
-            return MapAdminsToAdminDTOs(admins);
-        }
-
-        private List<AdminDTO> MapAdminsToAdminDTOs (List<Admin> admins)
-        {
-            List<AdminDTO> adminDTOs = new List<AdminDTO>();
-
-            foreach(Admin admin in admins)
-            {
-                AdminDTO adminDTO = new AdminDTO
-                {
-                    UserId = admin.UserId,
-                    UserName = admin.UserName,
-                    Password = admin.Password,
-                    Email = admin.Email,
-                    ProfilePicturePath = admin.ProfilePicturePath,
-                    Description = admin.Description,
-                    PostHistory = MapPostsToPostDTOs(admin.PostHistory)
-                };
-                    adminDTO.AdminTitle = admin.AdminTitle;
-                    adminDTO.AdminPrivilegeLevel = admin.AdminPrivilegeLevel;
-               
-                adminDTOs.Add(adminDTO);
-            }
-
-            return adminDTOs;
+            return _mapper.MapAdminsToAdminDTOs(admins);
         }
 
         public List<ModeratorDTO> GetModerators()
         {
             List<Moderator> moderators = _dataContext.Moderators
                 .Include(m => m.PostHistory)
+                .Include(m => m.EventsAttended)
+                .Include(m => m.BlogComments)
+                .Include(m => m.NewsComments)
                 .ToList();
 
-            return MapModeratorsToModeratorDTOs(moderators);
-        }
-
-        private List<ModeratorDTO> MapModeratorsToModeratorDTOs (List<Moderator> moderators)
-        {
-            List<ModeratorDTO> moderatorDTOs = new List<ModeratorDTO>();
-
-            foreach (Moderator moderator in moderators)
-            {
-                ModeratorDTO moderatorDTO = new ModeratorDTO
-                {
-                    UserId = moderator.UserId,
-                    UserName = moderator.UserName,
-                    Password = moderator.Password,
-                    Email = moderator.Email,
-                    ProfilePicturePath = moderator.ProfilePicturePath,
-                    Description = moderator.Description,
-                    PostHistory = MapPostsToPostDTOs(moderator.PostHistory)
-                };
-                    moderatorDTO.ModerationArea = moderator.ModerationArea;
-                    moderatorDTO.ModerationExperience = moderator.ModerationExperience;
-
-                moderatorDTOs.Add(moderatorDTO);
-            }
-
-            return moderatorDTOs;
+            return _mapper.MapModeratorsToModeratorDTOs(moderators);
         }
     }
 }

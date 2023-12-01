@@ -1,17 +1,18 @@
-﻿using Core.UserClasses;
+﻿using Core.CommunityClasses;
+using Core.UserClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.CommunityClasses
+namespace Services.DTOs
 {
-    public class BlogComment
+    public class BlogCommentDTO
     {
         public int BlogCommentId { get; set; }
         public string Comment { get; set; }
-        public Blog Blog { get; set; }
-        public User User { get; set; }
+        public BlogDTO Blog { get; set; }
+        public UserDTO User { get; set; }
     }
 }
