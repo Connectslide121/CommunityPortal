@@ -39,7 +39,7 @@ namespace Services.Services
             return _mapper.MapUsersToUserDTOs(users);
         }
 
-        public UserDTO GetUserById(int userId) //******************************************Handle NULL exception????? make sure that this ID always exists.
+        public UserDTO GetUserById(int userId) //****************************Handle NULL exception????? make sure that this UserID always exists.
         {
             User? user = _dataContext.Users
                .Where(u => u.UserId == userId)

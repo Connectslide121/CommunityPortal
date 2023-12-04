@@ -14,5 +14,6 @@ namespace Services.Interfaces
         List<GuestDTO> GetGuests();
         List<AdminDTO> GetAdmins();
         List<ModeratorDTO> GetModerators();
+        UserDTO GetUserById(int id);
     }
 }

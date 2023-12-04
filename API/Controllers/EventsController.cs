@@ -16,7 +16,7 @@ namespace API.Controllers
             _eventsService = eventsService;
         }
 
-        [HttpGet("GetEvents")]
+        [HttpGet("events")]
 
         public List<EventDTO> GetEvents()
         {

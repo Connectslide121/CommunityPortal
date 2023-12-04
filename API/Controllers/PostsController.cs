@@ -21,19 +21,19 @@ namespace API.Controllers
         }
 
 
-        [HttpGet("GetPosts")]
+        [HttpGet("posts")]
         public List<PostDTO> GetPosts()
         {
             return _postsService.GetPosts();           
         }
 
-        [HttpGet("GetBlogs")]
+        [HttpGet("blogs")]
         public List<BlogDTO> GetBlogs()
         {
             return _postsService.GetBlogs();
         }
 
-        [HttpGet("GetNews")]
+        [HttpGet("news")]
         public List<NewsDTO> GetNews()
         {
             return _postsService.GetNews();

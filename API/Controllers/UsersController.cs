@@ -19,28 +19,37 @@ namespace API.Controllers
         }
 
 
-        [HttpGet("GetUsers")]
+        [HttpGet("users")]
         public List<UserDTO> GetUsers() 
         { 
             return _usersService.GetUsers();
         }
 
-        [HttpGet("GetGuests")]
+        [HttpGet("guests")]
         public List<GuestDTO> GetGuests() 
         { 
             return _usersService.GetGuests();
         }
 
-        [HttpGet("GetAdmins")]
+        [HttpGet("admins")]
         public List<AdminDTO> GetAdmins() 
         { 
             return _usersService.GetAdmins();
         }
 
-        [HttpGet("GetModerators")]
+        [HttpGet("moderators")]
         public List<ModeratorDTO> GetModerators() 
         { 
             return _usersService.GetModerators();
         }
+
+        [HttpGet("user/{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            UserDTO userById = _usersService.GetUserById(id);
+
+            return User == null ? NotFound() : Ok(userById);
+        }
+
     }
 }
