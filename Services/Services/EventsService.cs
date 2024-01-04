@@ -34,19 +34,20 @@ namespace Services.Services
             return _mapper.MapEventsToEventDTOs(events);
         }
 
-        public void AddEvent(Event newEvent)/////////////will we get Event or EventDTO????????
+        public void AddEvent(EventDTO newEvent)/////////////map EventDTO to Event
         {
+
             _dataContext.Events.Add(newEvent);
             _dataContext.SaveChanges();
         }
 
-        public void UpdateEvent(Event newEvent)/////////////will we get Event or EventDTO????????
+        public void UpdateEvent(EventDTO updatedEvent)/////////////no need to map????????  
         {
-            var existingEvent = _dataContext.Events.Find(newEvent.EventId);
+            var existingEvent = _dataContext.Events.Find(updatedEvent.EventId);
 
             if (existingEvent != null)
             {
-                _dataContext.Entry(existingEvent).CurrentValues.SetValues(newEvent);
+                _dataContext.Entry(existingEvent).CurrentValues.SetValues(updatedEvent);
                 _dataContext.SaveChanges();
             }
         }
@@ -61,7 +62,6 @@ namespace Services.Services
                 _dataContext.SaveChanges();
             }
         }
-
 
     }
 }

@@ -102,13 +102,13 @@ namespace Services.Services
             return _mapper.MapModeratorsToModeratorDTOs(moderators);
         }
 
-        public void AddUser(User user)/////////////will we get User or UserDTO????????
+        public void AddUser(UserDTO user)/////////////map UserDTO to User
         {
             _dataContext.Users.Add(user);
             _dataContext.SaveChanges();
         }
 
-        public void UpdateUser(User user)/////////////will we get User or UserDTO????????
+        public void UpdateUser(UserDTO user)/////////////no need to map????????  
         {
             var existingUser = _dataContext.Users.Find(user.UserId);
 

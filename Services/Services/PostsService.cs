@@ -60,13 +60,13 @@ namespace Services.Services
             return _mappers.MapNewsToNewsDTOs(news);
         }
 
-        public void AddPost(Post post)/////////////will we get Post or PostDTO????????
+        public void AddPost(PostDTO post)/////////////map PostDTO to Post
         {
             _dataContext.Posts.Add(post);
             _dataContext.SaveChanges();
         }
 
-        public void UpdatePost(Post post)/////////////will we get Post or PostDTO????????
+        public void UpdatePost(PostDTO post)/////////////no need to map????????  
         {
             var existingPost = _dataContext.Posts.Find(post.PostId);
 

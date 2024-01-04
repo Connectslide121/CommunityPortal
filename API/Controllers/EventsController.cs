@@ -25,19 +25,13 @@ namespace API.Controllers
             return events == null ? NotFound() : Ok(events);
         }
 
-        [HttpPost("events")]
+        [HttpPost("create")]
 
-        public IActionResult CreateEvent([FromBody] EventDTO newEvent)
+        public void CreateEvent(EventDTO newEvent) //////Is "void" a good return?????????????????????????????????
         {
-            if (newEvent == null)
-            {
-                return BadRequest("Invalid data");
-            }
-
-            UserDTO createdUser = _eventsService.CreateEvent(newEvent);
-
-            // Assuming your service returns the created user
-            return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
+            _eventsService.AddEvent(newEvent);
         }
+
+
     }
 }

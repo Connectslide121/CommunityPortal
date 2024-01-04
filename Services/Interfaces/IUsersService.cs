@@ -15,5 +15,8 @@ namespace Services.Interfaces
         List<AdminDTO> GetAdmins();
         List<ModeratorDTO> GetModerators();
         UserDTO GetUserById(int id);
+        void AddUser(UserDTO user);
+        void UpdateUser(UserDTO user);
+        void DeleteUser(int userId);
     }
 }

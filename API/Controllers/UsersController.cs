@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.DTOs;
 using Services.Interfaces;
+using Services.Services;
 using System.Collections.Generic;
 
 namespace API.Controllers
@@ -20,7 +21,7 @@ namespace API.Controllers
         }
 
 
-        [HttpGet("users")]
+        [HttpGet("all")]
         public IActionResult GetUsers() 
         { 
             List<UserDTO> users = _usersService.GetUsers();
@@ -54,5 +55,13 @@ namespace API.Controllers
             UserDTO userById = _usersService.GetUserById(id);
             return userById == null ? NotFound() : Ok(userById);
         }
+
+        [HttpPost("create")]
+
+        public void CreateUser(UserDTO user) //////Is "void" a good return?????????????????????????????????
+        {
+            _usersService.AddUser(user);
+        }
+
     }
 }

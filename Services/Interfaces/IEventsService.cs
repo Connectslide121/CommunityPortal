@@ -11,5 +11,9 @@ namespace Services.Interfaces
     public interface IEventsService
     {
         List<EventDTO> GetEvents();
+        void AddEvent(EventDTO newEvent);
+        void UpdateEvent(EventDTO newEvent);
+        void DeleteEvent(int eventId);
+
     }
 }

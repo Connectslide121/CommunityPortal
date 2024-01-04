@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Services.DTOs;
 using Services.Interfaces;
+using Services.Services;
 
 namespace API.Controllers
 {
@@ -42,5 +43,13 @@ namespace API.Controllers
             List<NewsDTO> news = _postsService.GetNews();
             return news == null ? NotFound() : Ok(news);
         }
+
+        [HttpPost("create")]
+
+        public void CreatePost(PostDTO post) //////Is "void" a good return?????????????????????????????????
+        {
+            _postsService.AddPost(post);
+        }
+
     }
 }
