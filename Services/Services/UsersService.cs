@@ -42,12 +42,14 @@ namespace Services.Services
         public UserDTO GetUserById(int userId) //****************************Handle NULL exception????? make sure that this UserID always exists.
         {
             User? user = _dataContext.Users
-               .Where(u => u.UserId == userId)
-               .Include(u => u.PostHistory)
-               .Include(u => u.EventsAttended)
-               .Include(u => u.BlogComments)
-               .Include(u => u.NewsComments)
-               .FirstOrDefault();
+                .Where(u => u.UserId == userId)
+                .Include(u => u.PostHistory)
+                .Include(u => u.EventsAttended)
+                .Include(u => u.BlogComments)
+                    .ThenInclude(c => c.Blog) 
+                .Include(u => u.NewsComments)
+                    .ThenInclude(c => c.News)
+                .FirstOrDefault();
 
             return _mapper.MapUserToUserDTO(user);
         }

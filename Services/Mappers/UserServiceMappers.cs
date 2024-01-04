@@ -65,7 +65,29 @@ namespace Services.Mappers
                 UserName = user.UserName,
                 Email = user.Email,
                 ProfilePicturePath = user.ProfilePicturePath,
+                Description = user.Description,
+                EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
+                PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
+                NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments), //Write custom mapper for this method
+                BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments), //Write custom mapper for this method
             };
+
+            if (user is Guest guest)
+            {
+                userDTO.UserExperience = guest.UserExperience;
+            }
+
+            else if (user is Admin admin)
+            {
+                userDTO.AdminTitle = admin.AdminTitle;
+                userDTO.AdminPrivilegeLevel = admin.AdminPrivilegeLevel;
+            }
+
+            else if (user is Moderator moderator)
+            {
+                userDTO.ModerationExperience = moderator.ModerationExperience;
+                userDTO.ModerationArea = moderator.ModerationArea;
+            }
 
             return userDTO;
         }

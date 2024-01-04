@@ -4,6 +4,7 @@ using Core.NewsClasses;
 using Core.UserClasses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Services.DTOs;
 using Services.Interfaces;
 
@@ -22,24 +23,24 @@ namespace API.Controllers
 
 
         [HttpGet("posts")]
-        public List<PostDTO> GetPosts()
+        public IActionResult GetPosts()
         {
-            return _postsService.GetPosts();           
+            List<PostDTO> posts = _postsService.GetPosts();
+            return posts == null ? NotFound() : Ok(posts);           
         }
 
         [HttpGet("blogs")]
-        public List<BlogDTO> GetBlogs()
+        public IActionResult GetBlogs()
         {
-            return _postsService.GetBlogs();
+            List<BlogDTO> blogs = _postsService.GetBlogs();
+            return blogs == null ? NotFound() : Ok(blogs);
         }
 
         [HttpGet("news")]
-        public List<NewsDTO> GetNews()
+        public IActionResult GetNews()
         {
-            return _postsService.GetNews();
+            List<NewsDTO> news = _postsService.GetNews();
+            return news == null ? NotFound() : Ok(news);
         }
-
-
-
     }
 }

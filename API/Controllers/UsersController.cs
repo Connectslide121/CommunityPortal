@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.DTOs;
 using Services.Interfaces;
+using System.Collections.Generic;
 
 namespace API.Controllers
 {
@@ -20,36 +21,38 @@ namespace API.Controllers
 
 
         [HttpGet("users")]
-        public List<UserDTO> GetUsers() 
+        public IActionResult GetUsers() 
         { 
-            return _usersService.GetUsers();
+            List<UserDTO> users = _usersService.GetUsers();
+            return users == null ? NotFound() : Ok(users);
         }
 
         [HttpGet("guests")]
-        public List<GuestDTO> GetGuests() 
+        public IActionResult GetGuests() 
         { 
-            return _usersService.GetGuests();
+            List<GuestDTO> guests = _usersService.GetGuests();
+            return guests == null ? NotFound() : Ok(guests);
         }
 
         [HttpGet("admins")]
-        public List<AdminDTO> GetAdmins() 
-        { 
-            return _usersService.GetAdmins();
+        public IActionResult GetAdmins() 
+        {
+            List<AdminDTO> admins = _usersService.GetAdmins();
+            return admins == null ? NotFound() : Ok(admins);
         }
 
         [HttpGet("moderators")]
-        public List<ModeratorDTO> GetModerators() 
-        { 
-            return _usersService.GetModerators();
+        public IActionResult GetModerators()
+        {
+            List<ModeratorDTO> moderators = _usersService.GetModerators();
+            return moderators == null ? NotFound() : Ok(moderators);
         }
 
         [HttpGet("user/{id}")]
         public IActionResult GetUserById(int id)
         {
             UserDTO userById = _usersService.GetUserById(id);
-
-            return User == null ? NotFound() : Ok(userById);
+            return userById == null ? NotFound() : Ok(userById);
         }
-
     }
 }

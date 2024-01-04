@@ -18,10 +18,10 @@ namespace API.Controllers
 
         [HttpGet("events")]
 
-        public List<EventDTO> GetEvents()
+        public IActionResult GetEvents()
         {
-            return _eventsService.GetEvents();
+            List<EventDTO> events = _eventsService.GetEvents();
+            return events == null ? NotFound() : Ok(events);
         }
     }
-
 }
