@@ -101,5 +101,34 @@ namespace Services.Services
 
             return _mapper.MapModeratorsToModeratorDTOs(moderators);
         }
+
+        public void AddUser(User user)/////////////will we get User or UserDTO????????
+        {
+            _dataContext.Users.Add(user);
+            _dataContext.SaveChanges();
+        }
+
+        public void UpdateUser(User user)/////////////will we get User or UserDTO????????
+        {
+            var existingUser = _dataContext.Users.Find(user.UserId);
+
+            if (existingUser != null)
+            {
+                _dataContext.Entry(existingUser).CurrentValues.SetValues(user);
+                _dataContext.SaveChanges();
+            }
+        }
+
+        public void DeleteUser(int userId)
+        {
+            var userToDelete = _dataContext.Users.Find(userId);
+
+            if (userToDelete != null)
+            {
+                _dataContext.Users.Remove(userToDelete);
+                _dataContext.SaveChanges();
+            }
+        }
+
     }
 }

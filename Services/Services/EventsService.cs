@@ -1,4 +1,5 @@
-﻿using Core.NewsClasses;
+﻿using Core;
+using Core.NewsClasses;
 using Core.UserClasses;
 using DataBaseConnection;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,35 @@ namespace Services.Services
 
             return _mapper.MapEventsToEventDTOs(events);
         }
+
+        public void AddEvent(Event newEvent)/////////////will we get Event or EventDTO????????
+        {
+            _dataContext.Events.Add(newEvent);
+            _dataContext.SaveChanges();
+        }
+
+        public void UpdateEvent(Event newEvent)/////////////will we get Event or EventDTO????????
+        {
+            var existingEvent = _dataContext.Events.Find(newEvent.EventId);
+
+            if (existingEvent != null)
+            {
+                _dataContext.Entry(existingEvent).CurrentValues.SetValues(newEvent);
+                _dataContext.SaveChanges();
+            }
+        }
+
+        public void DeleteEvent(int eventId)
+        {
+            var eventToDelete = _dataContext.Events.Find(eventId);
+
+            if (eventToDelete != null)
+            {
+                _dataContext.Events.Remove(eventToDelete);
+                _dataContext.SaveChanges();
+            }
+        }
+
 
     }
 }

@@ -60,5 +60,33 @@ namespace Services.Services
             return _mappers.MapNewsToNewsDTOs(news);
         }
 
+        public void AddPost(Post post)/////////////will we get Post or PostDTO????????
+        {
+            _dataContext.Posts.Add(post);
+            _dataContext.SaveChanges();
+        }
+
+        public void UpdatePost(Post post)/////////////will we get Post or PostDTO????????
+        {
+            var existingPost = _dataContext.Posts.Find(post.PostId);
+
+            if (existingPost != null)
+            {
+                _dataContext.Entry(existingPost).CurrentValues.SetValues(post);
+                _dataContext.SaveChanges();
+            }
+        }
+
+        public void DeletePost(int postId)
+        {
+            var postToDelete = _dataContext.Posts.Find(postId);
+
+            if (postToDelete != null)
+            {
+                _dataContext.Posts.Remove(postToDelete);
+                _dataContext.SaveChanges();
+            }
+        }
+
     }
 }
