@@ -36,31 +36,40 @@ namespace Services.Services
 
         public void AddEvent(EventDTO newEvent)/////////////map EventDTO to Event
         {
-
             _dataContext.Events.Add(newEvent);
             _dataContext.SaveChanges();
         }
 
-        public void UpdateEvent(EventDTO updatedEvent)/////////////no need to map????????  
+        public bool UpdateEvent(EventDTO updatedEvent)/////////////no need to map????????
+                                                      /////////////Is this a good approach with the bool????????
         {
             var existingEvent = _dataContext.Events.Find(updatedEvent.EventId);
+            bool eventExists = false;
 
             if (existingEvent != null)
             {
                 _dataContext.Entry(existingEvent).CurrentValues.SetValues(updatedEvent);
                 _dataContext.SaveChanges();
+                eventExists = true;
             }
+
+            return eventExists;
         }
 
-        public void DeleteEvent(int eventId)
+        public bool DeleteEvent(int eventId)/////////////Is this a good approach with the bool????????
         {
             var eventToDelete = _dataContext.Events.Find(eventId);
+            bool eventExists = false;
+
 
             if (eventToDelete != null)
             {
                 _dataContext.Events.Remove(eventToDelete);
                 _dataContext.SaveChanges();
+                eventExists = true;
             }
+
+            return eventExists;
         }
 
     }

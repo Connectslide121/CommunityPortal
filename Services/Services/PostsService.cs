@@ -66,26 +66,35 @@ namespace Services.Services
             _dataContext.SaveChanges();
         }
 
-        public void UpdatePost(PostDTO post)/////////////no need to map????????  
+        public bool UpdatePost(PostDTO post)/////////////no need to map????????
+                                            /////////////Is this a good approach with the bool????????
         {
             var existingPost = _dataContext.Posts.Find(post.PostId);
+            bool postExists = false;
 
             if (existingPost != null)
             {
                 _dataContext.Entry(existingPost).CurrentValues.SetValues(post);
                 _dataContext.SaveChanges();
+                postExists = true;
             }
+
+            return postExists;
         }
 
-        public void DeletePost(int postId)
+        public bool DeletePost(int postId)/////////////Is this a good approach with the bool????????
         {
             var postToDelete = _dataContext.Posts.Find(postId);
+            bool postExists = false;
 
             if (postToDelete != null)
             {
                 _dataContext.Posts.Remove(postToDelete);
                 _dataContext.SaveChanges();
+                postExists = true;
             }
+
+            return postExists;
         }
 
     }

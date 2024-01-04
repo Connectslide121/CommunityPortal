@@ -58,9 +58,42 @@ namespace API.Controllers
 
         [HttpPost("create")]
 
-        public void CreateUser(UserDTO user) //////Is "void" a good return?????????????????????????????????
+        public void CreateUser(UserDTO user) //////Is "void" a good return????????? shoudl it be IActionResult returning NoContent()??
+                                             //////or return CreatedAtAction()???
+                                             //////or the user itself???
         {
             _usersService.AddUser(user);
+        }
+
+        [HttpPut("update/{id}")]
+        public IActionResult UpdateUser(int id, UserDTO updatedUser)/////Is this a better approach than the above?  PROBABLY
+        {
+            if (updatedUser == null || id != updatedUser.UserId)
+            {
+                return BadRequest("Invalid data");
+            }
+
+            bool userUpdated = _usersService.UpdateUser(updatedUser);
+
+            if (!userUpdated)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("delete/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            bool userDeleted = _usersService.DeleteUser(id);
+
+            if (!userDeleted)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
 
     }

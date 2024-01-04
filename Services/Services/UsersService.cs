@@ -108,26 +108,35 @@ namespace Services.Services
             _dataContext.SaveChanges();
         }
 
-        public void UpdateUser(UserDTO user)/////////////no need to map????????  
+        public bool UpdateUser(UserDTO user)/////////////no need to map????????
+                                            /////////////Is this a good approach with the bool????????
         {
             var existingUser = _dataContext.Users.Find(user.UserId);
+            bool userExists = false;
 
             if (existingUser != null)
             {
                 _dataContext.Entry(existingUser).CurrentValues.SetValues(user);
                 _dataContext.SaveChanges();
+                userExists = true;
             }
+
+            return userExists;
         }
 
-        public void DeleteUser(int userId)
+        public bool DeleteUser(int userId)/////////////Is this a good approach with the bool????????
         {
             var userToDelete = _dataContext.Users.Find(userId);
+            bool userExists = false;
 
             if (userToDelete != null)
             {
                 _dataContext.Users.Remove(userToDelete);
                 _dataContext.SaveChanges();
+                userExists = true;
             }
+
+            return userExists;
         }
 
     }

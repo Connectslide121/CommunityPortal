@@ -27,11 +27,43 @@ namespace API.Controllers
 
         [HttpPost("create")]
 
-        public void CreateEvent(EventDTO newEvent) //////Is "void" a good return?????????????????????????????????
+        public void CreateEvent(EventDTO newEvent) //////Is "void" a good return????????? shoudl it be IActionResult returning NoContent()??
+                                                   //////or return CreatedAtAction()???
+                                                   //////or the event itself???
         {
             _eventsService.AddEvent(newEvent);
         }
 
+        [HttpPut("update/{id}")]
+        public IActionResult UpdateEvent(int id, EventDTO updatedEvent)/////Is this a better approach than the above?  PROBABLY
+        {
+            if (updatedEvent == null || id != updatedEvent.EventId)
+            {
+                return BadRequest("Invalid data");
+            }
+
+            bool eventUpdated = _eventsService.UpdateEvent(updatedEvent);
+
+            if (!eventUpdated)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("delete/{id}")]
+        public IActionResult DeleteEvent(int id)
+        {
+            bool eventDeleted = _eventsService.DeleteEvent(id);
+
+            if (!eventDeleted)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
 
     }
 }
