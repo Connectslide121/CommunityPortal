@@ -65,15 +65,15 @@ namespace Services.Services
             _dataContext.SaveChanges();
         }
 
-        public bool UpdatePost(PostDTO post)/////////////no need to map????????
-                                            /////////////Is this a good approach with the bool????????
+        public bool UpdatePost(PostDTO postDTO)/////////////Is this a good approach with the bool????????
         {
-            var existingPost = _dataContext.Posts.Find(post.PostId);
+            var newPost = _mappers.MapPostDTOtoPost(postDTO);
+            var existingPost = _dataContext.Posts.Find(postDTO.PostId);
             bool postExists = false;
 
             if (existingPost != null)
             {
-                _dataContext.Entry(existingPost).CurrentValues.SetValues(post);
+                _dataContext.Entry(existingPost).CurrentValues.SetValues(newPost);
                 _dataContext.SaveChanges();
                 postExists = true;
             }

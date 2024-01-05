@@ -17,12 +17,12 @@ namespace Services.Services
     public class EventsService : IEventsService
     {
         private readonly DataContext _dataContext;
-        private EventsServiceMappers _mapper;
+        private EventsServiceMappers _mappers;
 
         public EventsService(DataContext dataContext) 
         {
             _dataContext = dataContext;
-            _mapper = new EventsServiceMappers();
+            _mappers = new EventsServiceMappers();
         }
 
         public List<EventDTO> GetEvents()
@@ -31,24 +31,24 @@ namespace Services.Services
                 .Include(e => e.Attendants)
                 .ToList();
 
-            return _mapper.MapEventsToEventDTOs(events);
+            return _mappers.MapEventsToEventDTOs(events);
         }
 
         public void AddEvent(EventDTO newEvent)
         {
-            _dataContext.Events.Add(_mapper.MapEventDTOToEvent(newEvent));
+            _dataContext.Events.Add(_mappers.MapEventDTOToEvent(newEvent));
             _dataContext.SaveChanges();
         }
 
-        public bool UpdateEvent(EventDTO updatedEvent)/////////////no need to map????????
-                                                      /////////////Is this a good approach with the bool????????
+        public bool UpdateEvent(EventDTO eventDTO)/////////////Is this a good approach with the bool????????
         {
-            var existingEvent = _dataContext.Events.Find(updatedEvent.EventId);
+            var newEvent = _mappers.MapEventDTOToEvent(eventDTO);
+            var existingEvent = _dataContext.Events.Find(eventDTO.EventId);
             bool eventExists = false;
 
             if (existingEvent != null)
             {
-                _dataContext.Entry(existingEvent).CurrentValues.SetValues(updatedEvent);
+                _dataContext.Entry(existingEvent).CurrentValues.SetValues(newEvent);
                 _dataContext.SaveChanges();
                 eventExists = true;
             }
@@ -60,7 +60,6 @@ namespace Services.Services
         {
             var eventToDelete = _dataContext.Events.Find(eventId);
             bool eventExists = false;
-
 
             if (eventToDelete != null)
             {

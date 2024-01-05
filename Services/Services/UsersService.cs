@@ -19,12 +19,12 @@ namespace Services.Services
     public class UsersService : IUsersService
     {
         private readonly DataContext _dataContext;
-        private UserServiceMappers _mapper;
+        private UserServiceMappers _mappers;
 
         public UsersService(DataContext dataContext)
         {
             _dataContext = dataContext;
-            _mapper = new UserServiceMappers();
+            _mappers = new UserServiceMappers();
         }
 
         public List<UserDTO> GetUsers()
@@ -35,10 +35,10 @@ namespace Services.Services
                 .Include(u => u.Comments)
                 .ToList();
 
-            return _mapper.MapUsersToUserDTOs(users);
+            return _mappers.MapUsersToUserDTOs(users);
         }
 
-        public UserDTO GetUserById(int userId) //****************************Handle NULL exception????? make sure that this UserID always exists.
+        public UserDTO GetUserById(int userId) //************Handle NULL exception????? make sure that this UserID always exists.
         {
             User? user = _dataContext.Users
                 .Where(u => u.UserId == userId)
@@ -48,7 +48,7 @@ namespace Services.Services
                     .ThenInclude(c => c.Post) 
                 .FirstOrDefault();
 
-            return _mapper.MapUserToUserDTO(user);
+            return _mappers.MapUserToUserDTO(user);
         }
 
         public List<GuestDTO> GetGuests()
@@ -61,7 +61,7 @@ namespace Services.Services
                         .ThenInclude(b => b.User)
                 .ToList();
 
-            return _mapper.MapGuestsToGuestDTOs(guests);
+            return _mappers.MapGuestsToGuestDTOs(guests);
         }
 
         public List<AdminDTO> GetAdmins() 
@@ -74,7 +74,7 @@ namespace Services.Services
                         .ThenInclude(b => b.User)
                 .ToList();
 
-            return _mapper.MapAdminsToAdminDTOs(admins);
+            return _mappers.MapAdminsToAdminDTOs(admins);
         }
 
         public List<ModeratorDTO> GetModerators()
@@ -87,24 +87,25 @@ namespace Services.Services
                         .ThenInclude(b => b.User)
                 .ToList();
 
-            return _mapper.MapModeratorsToModeratorDTOs(moderators);
+            return _mappers.MapModeratorsToModeratorDTOs(moderators);
         }
 
         public void AddUser(UserDTO user)
         {
-            _dataContext.Users.Add(_mapper.MapUserDTOToUser(user));
+            _dataContext.Users.Add(_mappers.MapUserDTOToUser(user));
             _dataContext.SaveChanges();
         }
 
-        public bool UpdateUser(UserDTO user)/////////////no need to map????????
-                                            /////////////Is this a good approach with the bool????????
+        public bool UpdateUser(UserDTO userDTO)//////Is this a good approach with the bool????????
         {
-            var existingUser = _dataContext.Users.Find(user.UserId);
+            User newUser = _mappers.MapUserDTOToUser(userDTO); 
+            var existingUser = _dataContext.Users.Find(userDTO.UserId);
             bool userExists = false;
+
 
             if (existingUser != null)
             {
-                _dataContext.Entry(existingUser).CurrentValues.SetValues(user);
+                _dataContext.Entry(existingUser).CurrentValues.SetValues(newUser);
                 _dataContext.SaveChanges();
                 userExists = true;
             }
@@ -112,7 +113,7 @@ namespace Services.Services
             return userExists;
         }
 
-        public bool DeleteUser(int userId)/////////////Is this a good approach with the bool????????
+        public bool DeleteUser(int userId)//////Is this a good approach with the bool????????
         {
             var userToDelete = _dataContext.Users.Find(userId);
             bool userExists = false;
