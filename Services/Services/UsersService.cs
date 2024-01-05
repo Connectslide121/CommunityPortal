@@ -31,6 +31,7 @@ namespace Services.Services
         {
             List<User> users = _dataContext.Users
                 .Include(u => u.PostHistory)
+                    .ThenInclude(p => p.Comments)
                 .Include(u => u.EventsAttended)
                 .Include(u => u.Comments)
                 .ToList();

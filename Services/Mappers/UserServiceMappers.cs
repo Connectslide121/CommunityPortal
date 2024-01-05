@@ -145,6 +145,20 @@ namespace Services.Mappers
             }
         }
 
+        public UserDTO MapUserToUserDTOShort(User user)
+        {
+            UserDTO userDTO = new UserDTO
+            {
+                UserId = user.UserId,
+                UserName = user.UserName,
+                Email = user.Email,
+                ProfilePicturePath = user.ProfilePicturePath,
+                Description = user.Description,
+            };
+
+            return userDTO;
+        }
+
         public User MapUserDTOToUser(UserDTO userDTO)
         {
             User user = new User
@@ -256,7 +270,8 @@ namespace Services.Mappers
                         PostContent = post.PostContent,
                         Timestamp = post.Timestamp,
                         BlogId = blog.BlogId,
-                        BlogCategory = blog.BlogCategory
+                        BlogCategory = blog.BlogCategory,
+                        Comments = MapCommentsToCommentDTOsShort(blog.Comments)
                     };
 
                     postDTOs.Add(blogDTO);
@@ -272,6 +287,7 @@ namespace Services.Mappers
                         Timestamp = post.Timestamp,
                         NewsId = news.NewsId,
                         NewsCategory = news.NewsCategory,
+                        Comments = MapCommentsToCommentDTOsShort(news.Comments)
                     };
 
                     postDTOs.Add(newsDTO);
@@ -288,7 +304,7 @@ namespace Services.Mappers
                 PostId = post.PostId,
                 Title = post.Title,
                 PostContent = post.PostContent,
-                User = MapUserToUserDTO(post.User)
+                User = MapUserToUserDTOShort(post.User)
             };
 
             return postDTO;
@@ -327,6 +343,25 @@ namespace Services.Mappers
                     CommentId = comment.CommentId,
                     CommentContent = comment.CommentContent,
                     Post = MapPostToPostDTO(comment.Post)
+                };
+
+                commentsDTO.Add(commentDTO);
+            }
+
+            return commentsDTO;
+        }
+
+        public List<CommentDTO> MapCommentsToCommentDTOsShort(List<Comment> comments)
+        {
+            List<CommentDTO> commentsDTO = new List<CommentDTO>();
+
+            foreach (Comment comment in comments)
+            {
+                CommentDTO commentDTO = new CommentDTO
+                {
+                    CommentId = comment.CommentId,
+                    CommentContent = comment.CommentContent,
+                    User = MapUserToUserDTOShort(comment.User)
                 };
 
                 commentsDTO.Add(commentDTO);
