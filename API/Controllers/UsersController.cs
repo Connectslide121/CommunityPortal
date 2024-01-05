@@ -80,20 +80,20 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok(updatedUser);
         }
 
         [HttpDelete("delete/{id}")]
-        public IActionResult DeleteUser(int id)
+        public IActionResult DeleteUser(int userId)
         {
-            bool userDeleted = _usersService.DeleteUser(id);
+            bool userDeleted = _usersService.DeleteUser(userId);
 
             if (!userDeleted)
             {
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok(userId);
         }
 
     }

@@ -75,20 +75,20 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok(updatedPost);
         }
 
         [HttpDelete("delete/{id}")]
-        public IActionResult DeletePost(int id)
+        public IActionResult DeletePost(int postId)
         {
-            bool postDeleted = _postsService.DeletePost(id);
+            bool postDeleted = _postsService.DeletePost(postId);
 
             if (!postDeleted)
             {
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok(postId);
         }
 
     }

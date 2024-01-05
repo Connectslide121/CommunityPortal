@@ -58,20 +58,20 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok(updatedEvent);
         }
 
         [HttpDelete("delete/{id}")]
-        public IActionResult DeleteEvent(int id)
+        public IActionResult DeleteEvent(int eventId)
         {
-            bool eventDeleted = _eventsService.DeleteEvent(id);
+            bool eventDeleted = _eventsService.DeleteEvent(eventId);
 
             if (!eventDeleted)
             {
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok(eventId);
         }
 
     }
