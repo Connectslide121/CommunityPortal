@@ -25,6 +25,15 @@ namespace API.Controllers
             return events == null ? NotFound() : Ok(events);
         }
 
+        [HttpGet("event/{id}")]
+
+        public IActionResult GetEventById(int eventId)
+        {
+            EventDTO eventById = _eventsService.GetEventById(eventId);
+            return eventById == null ? NotFound() : Ok(eventById);
+        }
+
+
         [HttpPost("create")]
 
         public void CreateEvent(EventDTO newEvent) //////Is "void" a good return????????? shoudl it be IActionResult returning NoContent()??

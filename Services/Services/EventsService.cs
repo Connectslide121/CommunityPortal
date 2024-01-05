@@ -34,6 +34,16 @@ namespace Services.Services
             return _mappers.MapEventsToEventDTOs(events);
         }
 
+        public EventDTO GetEventById(int eventId)
+        {
+            Event? evnt = _dataContext.Events
+                .Where(u => u.EventId == eventId)
+                .Include(u => u.Attendants)
+                .FirstOrDefault();
+
+            return _mappers.MapEventToEventDTO(evnt);
+        }
+
         public void AddEvent(EventDTO newEvent)
         {
             _dataContext.Events.Add(_mappers.MapEventDTOToEvent(newEvent));
@@ -42,8 +52,8 @@ namespace Services.Services
 
         public bool UpdateEvent(EventDTO eventDTO)/////////////Is this a good approach with the bool????????
         {
-            var newEvent = _mappers.MapEventDTOToEvent(eventDTO);
-            var existingEvent = _dataContext.Events.Find(eventDTO.EventId);
+            Event newEvent = _mappers.MapEventDTOToEvent(eventDTO);
+            Event? existingEvent = _dataContext.Events.Find(eventDTO.EventId);
             bool eventExists = false;
 
             if (existingEvent != null)

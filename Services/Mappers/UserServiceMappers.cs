@@ -256,7 +256,7 @@ namespace Services.Mappers
                         PostContent = post.PostContent,
                         Timestamp = post.Timestamp,
                         BlogId = blog.BlogId,
-                        BlogCategory = blog.Category
+                        BlogCategory = blog.BlogCategory
                     };
 
                     postDTOs.Add(blogDTO);
@@ -271,7 +271,7 @@ namespace Services.Mappers
                         PostContent = post.PostContent,
                         Timestamp = post.Timestamp,
                         NewsId = news.NewsId,
-                        NewsCategory = news.Category,
+                        NewsCategory = news.NewsCategory,
                     };
 
                     postDTOs.Add(newsDTO);

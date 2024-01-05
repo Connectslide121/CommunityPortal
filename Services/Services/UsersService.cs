@@ -99,7 +99,7 @@ namespace Services.Services
         public bool UpdateUser(UserDTO userDTO)//////Is this a good approach with the bool????????
         {
             User newUser = _mappers.MapUserDTOToUser(userDTO); 
-            var existingUser = _dataContext.Users.Find(userDTO.UserId);
+            User? existingUser = _dataContext.Users.Find(userDTO.UserId);
             bool userExists = false;
 
 

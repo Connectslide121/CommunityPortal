@@ -30,7 +30,7 @@ namespace Services.Mappers
                         PostContent = post.PostContent,
                         Timestamp = post.Timestamp,
                         BlogId = blog.BlogId,
-                        BlogCategory = blog.Category,
+                        BlogCategory = blog.BlogCategory,
                         Comments = MapCommentsToCommentDTOs(blog.Comments)
                     };
 
@@ -47,7 +47,7 @@ namespace Services.Mappers
                         PostContent = post.PostContent,
                         Timestamp = post.Timestamp,
                         NewsId = news.NewsId,
-                        NewsCategory = news.Category,
+                        NewsCategory = news.NewsCategory,
                         Comments = MapCommentsToCommentDTOs(news.Comments)
                     };
 
@@ -70,7 +70,7 @@ namespace Services.Mappers
                     PostContent = postDTO.PostContent,
                     Timestamp = postDTO.Timestamp,
                     NewsId = newsDTO.NewsId,
-                    Category = newsDTO.NewsCategory,
+                    NewsCategory = newsDTO.NewsCategory,
                     Comments = MapCommentsToCommentDTOs(newsDTO.Comments)
                 };
 
@@ -87,7 +87,7 @@ namespace Services.Mappers
                     PostContent = postDTO.PostContent,
                     Timestamp = postDTO.Timestamp,
                     BlogId = blogDTO.BlogId,
-                    Category = blogDTO.BlogCategory,
+                    BlogCategory = blogDTO.BlogCategory,
                     Comments = MapCommentsToCommentDTOs(blogDTO.Comments)
                 };
 
@@ -98,7 +98,48 @@ namespace Services.Mappers
             {
                 return new Post();
             }
+        }
 
+        public PostDTO MapPostToPostDTO(Post post)
+        {
+            if (post is News news)
+            {
+                NewsDTO newsDTO = new NewsDTO
+                {
+                    PostId = post.PostId,
+                    User = MapUserToUserDTO(post.User),
+                    Title = post.Title,
+                    PostContent = post.PostContent,
+                    Timestamp = post.Timestamp,
+                    NewsId = news.NewsId,
+                    NewsCategory = news.NewsCategory,
+                    Comments = MapCommentsToCommentDTOs(news.Comments)
+                };
+
+                return newsDTO;
+            }
+
+            else if (post is Blog blog)
+            {
+                BlogDTO blogDTO = new BlogDTO
+                {
+                    PostId = post.PostId,
+                    User = MapUserToUserDTO(post.User),
+                    Title = post.Title,
+                    PostContent = post.PostContent,
+                    Timestamp = post.Timestamp,
+                    BlogId = blog.BlogId,
+                    BlogCategory = blog.BlogCategory,
+                    Comments = MapCommentsToCommentDTOs(blog.Comments)
+                };
+
+                return blogDTO;
+            }
+
+            else
+            {
+                return new PostDTO();
+            }
         }
 
         public UserDTO MapUserToUserDTO(User user)
@@ -231,7 +272,7 @@ namespace Services.Mappers
                     PostContent = blog.PostContent,
                     Timestamp = blog.Timestamp,
                     BlogId = blog.PostId,
-                    BlogCategory = blog.Category,
+                    BlogCategory = blog.BlogCategory,
                     Comments = MapCommentsToCommentDTOs(blog.Comments)
                 };
 
@@ -293,7 +334,7 @@ namespace Services.Mappers
                     PostContent = news.PostContent,
                     Timestamp = news.Timestamp,
                     NewsId = news.NewsId,
-                    NewsCategory = news.Category,
+                    NewsCategory = news.NewsCategory,
                     Comments = MapCommentsToCommentDTOs(news.Comments)
                 };
                 newsDTOs.Add(newsDTO);

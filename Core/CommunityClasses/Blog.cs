@@ -24,7 +24,7 @@ namespace Core.CommunityClasses
     public class Blog : Post
     {
         public int BlogId { get; set; }
-        public BlogCategory Category { get; set; }
+        public BlogCategory BlogCategory { get; set; }
 
     }
 }

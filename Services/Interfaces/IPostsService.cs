@@ -15,8 +15,9 @@ namespace Services.Interfaces
         List<PostDTO> GetPosts();
         List<BlogDTO> GetBlogs();
         List<NewsDTO> GetNews();
-        void AddPost(PostDTO post);
-        bool UpdatePost(PostDTO post);
+        PostDTO GetPostById(int postId);
+        void AddPost(PostDTO newPost);
+        bool UpdatePost(PostDTO postToUpdate);
         bool DeletePost(int postId);
 
     }

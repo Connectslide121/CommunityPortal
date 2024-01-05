@@ -37,6 +37,17 @@ namespace Services.Services
             return _mappers.MapPostsToPostDTOs(posts);
         }
 
+        public PostDTO GetPostById(int postId)
+        {
+            Post? post = _dataContext.Posts
+                .Where(u => u.PostId == postId)
+                .Include(u => u.User)
+                .Include(u => u.Comments)
+                .FirstOrDefault();
+
+            return _mappers.MapPostToPostDTO(post);
+        }
+
         public List<BlogDTO> GetBlogs()
         {
             List<Blog> blogs = _dataContext.Blogs
@@ -67,8 +78,8 @@ namespace Services.Services
 
         public bool UpdatePost(PostDTO postDTO)/////////////Is this a good approach with the bool????????
         {
-            var newPost = _mappers.MapPostDTOtoPost(postDTO);
-            var existingPost = _dataContext.Posts.Find(postDTO.PostId);
+            Post newPost = _mappers.MapPostDTOtoPost(postDTO);
+            Post? existingPost = _dataContext.Posts.Find(postDTO.PostId);
             bool postExists = false;
 
             if (existingPost != null)

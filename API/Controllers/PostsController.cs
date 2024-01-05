@@ -22,12 +22,19 @@ namespace API.Controllers
             _postsService = postsService;
         }
 
-
         [HttpGet("all")]
         public IActionResult GetPosts()
         {
             List<PostDTO> posts = _postsService.GetPosts();
             return posts == null ? NotFound() : Ok(posts);           
+        }
+
+        [HttpGet("post/{id}")]
+
+        public IActionResult GetPostById(int postId)
+        {
+            PostDTO postById = _postsService.GetPostById(postId);
+            return postById == null ? NotFound() : Ok(postById);
         }
 
         [HttpGet("blogs")]

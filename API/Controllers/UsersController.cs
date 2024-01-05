@@ -50,9 +50,9 @@ namespace API.Controllers
         }
 
         [HttpGet("user/{id}")]
-        public IActionResult GetUserById(int id)
+        public IActionResult GetUserById(int userId)
         {
-            UserDTO userById = _usersService.GetUserById(id);
+            UserDTO userById = _usersService.GetUserById(userId);
             return userById == null ? NotFound() : Ok(userById);
         }
 
