@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataBaseConnection.Migrations;
+using System.Reflection.Metadata;
 
 namespace Services.Mappers
 {
@@ -20,38 +21,64 @@ namespace Services.Mappers
 
             foreach (User user in users)
             {
-                UserDTO userDTO = new UserDTO
-                {
-                    UserId = user.UserId,
-                    UserName = user.UserName,
-                    Password = user.Password,
-                    Email = user.Email,
-                    ProfilePicturePath = user.ProfilePicturePath,
-                    Description = user.Description,
-                    PostHistory = MapPostsToPostDTOs(user.PostHistory),
-                    EventsAttended = MapEventsToEventDTOs(user.EventsAttended),
-                    BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments),
-                    NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments)
-                };
-
                 if (user is Guest guest)
                 {
-                    userDTO.UserExperience = guest.UserExperience;
+                    GuestDTO guestDTO = new GuestDTO
+                    {
+                        UserId = user.UserId,
+                        UserName = user.UserName,
+                        Password = user.Password,
+                        Email = user.Email,
+                        ProfilePicturePath = user.ProfilePicturePath,
+                        Description = user.Description,
+                        PostHistory = MapPostsToPostDTOs(user.PostHistory),
+                        EventsAttended = MapEventsToEventDTOs(user.EventsAttended),
+                        BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments),
+                        NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments),
+                        UserExperience = guest.UserExperience
+                    };
+                    userDTOs.Add(guestDTO);
                 }
 
                 else if (user is Admin admin)
                 {
-                    userDTO.AdminTitle = admin.AdminTitle;
-                    userDTO.AdminPrivilegeLevel = admin.AdminPrivilegeLevel;
+                    AdminDTO adminDTO = new AdminDTO
+                    {
+                        UserId = user.UserId,
+                        UserName = user.UserName,
+                        Password = user.Password,
+                        Email = user.Email,
+                        ProfilePicturePath = user.ProfilePicturePath,
+                        Description = user.Description,
+                        PostHistory = MapPostsToPostDTOs(user.PostHistory),
+                        EventsAttended = MapEventsToEventDTOs(user.EventsAttended),
+                        BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments),
+                        NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments),
+                        AdminTitle = admin.AdminTitle,
+                        AdminPrivilegeLevel = admin.AdminPrivilegeLevel
+                    };
+                    userDTOs.Add(adminDTO);
                 }
 
                 else if (user is Moderator moderator)
                 {
-                    userDTO.ModerationExperience = moderator.ModerationExperience;
-                    userDTO.ModerationArea = moderator.ModerationArea;
+                    ModeratorDTO moderatorDTO = new ModeratorDTO
+                    {
+                        UserId = user.UserId,
+                        UserName = user.UserName,
+                        Password = user.Password,
+                        Email = user.Email,
+                        ProfilePicturePath = user.ProfilePicturePath,
+                        Description = user.Description,
+                        PostHistory = MapPostsToPostDTOs(user.PostHistory),
+                        EventsAttended = MapEventsToEventDTOs(user.EventsAttended),
+                        BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments),
+                        NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments),
+                        ModerationExperience = moderator.ModerationExperience,
+                        ModerationArea = moderator.ModerationArea,
+                    };
+                    userDTOs.Add(moderatorDTO);
                 }
-
-                userDTOs.Add(userDTO);
             }
 
             return userDTOs;
@@ -59,37 +86,83 @@ namespace Services.Mappers
 
         public UserDTO MapUserToUserDTO(User user)
         {
-            UserDTO userDTO = new UserDTO
-            {
-                UserId = user.UserId,
-                UserName = user.UserName,
-                Email = user.Email,
-                ProfilePicturePath = user.ProfilePicturePath,
-                Description = user.Description,
-                EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
-                PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
-                NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments), //Write custom mapper for this method
-                BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments), //Write custom mapper for this method
-            };
-
             if (user is Guest guest)
             {
-                userDTO.UserExperience = guest.UserExperience;
+                GuestDTO guestDTO = new GuestDTO
+                {
+                    UserId = user.UserId,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    ProfilePicturePath = user.ProfilePicturePath,
+                    Description = user.Description,
+                    EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
+                    PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
+                    NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments), //Write custom mapper for this method
+                    BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments), //Write custom mapper for this method
+                    UserExperience = guest.UserExperience
+                };
+
+                return guestDTO;
             }
 
             else if (user is Admin admin)
             {
-                userDTO.AdminTitle = admin.AdminTitle;
-                userDTO.AdminPrivilegeLevel = admin.AdminPrivilegeLevel;
+                AdminDTO adminDTO = new AdminDTO
+                {
+                    UserId = user.UserId,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    ProfilePicturePath = user.ProfilePicturePath,
+                    Description = user.Description,
+                    EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
+                    PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
+                    NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments), //Write custom mapper for this method
+                    BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments), //Write custom mapper for this method
+                    AdminTitle = admin.AdminTitle,
+                    AdminPrivilegeLevel = admin.AdminPrivilegeLevel
+                };
+
+                return adminDTO;
             }
 
             else if (user is Moderator moderator)
             {
-                userDTO.ModerationExperience = moderator.ModerationExperience;
-                userDTO.ModerationArea = moderator.ModerationArea;
+                ModeratorDTO moderatorDTO = new ModeratorDTO
+                {
+                    UserId = user.UserId,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    ProfilePicturePath = user.ProfilePicturePath,
+                    Description = user.Description,
+                    EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
+                    PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
+                    NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments), //Write custom mapper for this method
+                    BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments), //Write custom mapper for this method
+                    ModerationExperience = moderator.ModerationExperience,
+                    ModerationArea = moderator.ModerationArea,
+                };
+
+                return moderatorDTO;
             }
 
-            return userDTO;
+            else
+            {
+                return new UserDTO();
+            }
+        }
+
+        public User MapUserDTOToUser(UserDTO userDTO)
+        {
+            User user = new User
+            {
+                UserId = userDTO.UserId,
+                UserName = userDTO.UserName,
+                Email = userDTO.Email,
+                ProfilePicturePath = userDTO.ProfilePicturePath,
+                Description = userDTO.Description,
+            };
+
+            return user;
         }
 
 
@@ -183,28 +256,35 @@ namespace Services.Mappers
 
             foreach (Post post in posts)
             {
-                PostDTO postDTO = new PostDTO
-                {
-                    PostId = post.PostId,
-                    Content = post.Content,
-                    Timestamp = post.Timestamp
-                };
-
                 if (post is Blog blog)
                 {
-                    postDTO.BlogId = blog.BlogId;
-                    postDTO.BlogTitle = blog.Title;
-                    postDTO.BlogCategory = blog.Category;
+                    BlogDTO blogDTO = new BlogDTO
+                    {
+                        PostId = post.PostId,
+                        Title = post.Title,
+                        Content = post.Content,
+                        Timestamp = post.Timestamp,
+                        BlogId = blog.BlogId,
+                        BlogCategory = blog.Category
+                    };
+
+                    postDTOs.Add(blogDTO);
                 }
 
                 if (post is News news)
                 {
-                    postDTO.NewsId = news.NewsId;
-                    postDTO.NewsTitle = news.Title;
-                    postDTO.NewsCategory = news.Category;
-                }
+                    NewsDTO newsDTO = new NewsDTO
+                    {
+                        PostId = post.PostId,
+                        Title = post.Title,
+                        Content = post.Content,
+                        Timestamp = post.Timestamp,
+                        NewsId = news.NewsId,
+                        NewsCategory = news.Category,
+                    };
 
-                postDTOs.Add(postDTO);
+                    postDTOs.Add(newsDTO);
+                }
             }
 
             return postDTOs;
@@ -216,7 +296,7 @@ namespace Services.Mappers
             {
                 PostId = blog.PostId,
                 BlogId = blog.BlogId,
-                BlogTitle = blog.Title,
+                Title = blog.Title,
                 Content = blog.Content,
                 User = MapUserToUserDTO(blog.User)
             };
@@ -230,7 +310,7 @@ namespace Services.Mappers
             {
                 PostId = news.PostId,
                 NewsId = news.NewsId,
-                NewsTitle = news.Title,
+                Title = news.Title,
                 Content = news.Content,
                 User = MapUserToUserDTO(news.User)
             };

@@ -102,9 +102,9 @@ namespace Services.Services
             return _mapper.MapModeratorsToModeratorDTOs(moderators);
         }
 
-        public void AddUser(UserDTO user)/////////////map UserDTO to User
+        public void AddUser(UserDTO user)
         {
-            _dataContext.Users.Add(user);
+            _dataContext.Users.Add(_mapper.MapUserDTOToUser(user));
             _dataContext.SaveChanges();
         }
 

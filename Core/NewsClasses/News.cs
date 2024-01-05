@@ -23,7 +23,6 @@ namespace Core.NewsClasses
     public class News : Post
     {
         public int NewsId { get; set; }
-        public string Title { get; set; }
         public NewsCategory Category { get; set; }
         public List<NewsComment> NewsComments { get; set; }
 

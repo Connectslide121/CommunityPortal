@@ -34,9 +34,9 @@ namespace Services.Services
             return _mapper.MapEventsToEventDTOs(events);
         }
 
-        public void AddEvent(EventDTO newEvent)/////////////map EventDTO to Event
+        public void AddEvent(EventDTO newEvent)
         {
-            _dataContext.Events.Add(newEvent);
+            _dataContext.Events.Add(_mapper.MapEventDTOToEvent(newEvent));
             _dataContext.SaveChanges();
         }
 

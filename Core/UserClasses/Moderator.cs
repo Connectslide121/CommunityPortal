@@ -16,7 +16,7 @@ namespace Core.UserClasses
     public class Moderator : User
     {
         public ModerationArea ModerationArea { get; set; }
-        public int ModerationExperience { get; set; } //based on moderation activity
+        public int ModerationExperience { get; set; } = 0; //based on moderation activity
 
     }
 }

@@ -8,7 +8,7 @@ namespace Core.UserClasses
 {
     public class Admin : User
     {
-        public string AdminTitle { get; set; }
+        public string AdminTitle { get; set; } // e.g. GREAT BOSS, SUPREME COMMANDER... hahah
         public int AdminPrivilegeLevel { get; set; }
 
     }

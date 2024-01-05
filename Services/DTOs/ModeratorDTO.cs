@@ -9,20 +9,10 @@ using System.Threading.Tasks;
 
 namespace Services.DTOs
 {
-    public class ModeratorDTO
+    public class ModeratorDTO : UserDTO
     {
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string ProfilePicturePath { get; set; }
-        public string Description { get; set; }
-        public List<PostDTO> PostHistory { get; set; }
-        public List<EventDTO> EventsAttended { get; set; }
-        public List<NewsCommentDTO> NewsComments { get; set; }
-        public List<BlogCommentDTO> BlogComments { get; set; }
-        public ModerationArea ModerationArea { get; set; } //Moderator
-        public int ModerationExperience { get; set; } //Moderator
+        public ModerationArea ModerationArea { get; set; } 
+        public int ModerationExperience { get; set; } 
 
     }
 }

@@ -8,7 +8,7 @@ namespace Core.UserClasses
 {
     public class Guest : User
     {
-        public int UserExperience { get; set; } //based on activity
+        public int UserExperience { get; set; } = 0; //based on activity
 
     }
 }

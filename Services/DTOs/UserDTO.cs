@@ -21,12 +21,6 @@ namespace Services.DTOs
         public List<PostDTO> PostHistory { get; set; }
         public List<NewsCommentDTO> NewsComments { get; set; }
         public List<BlogCommentDTO> BlogComments { get; set; }
-        public int UserExperience { get; set; } //Guest
-        public string AdminTitle { get; set; } //Admin
-        public int AdminPrivilegeLevel { get; set; } //Admin
-        public ModerationArea ModerationArea { get; set; } //Moderator
-        public int ModerationExperience { get; set; } //Moderator
-
 
     }
 }

@@ -34,6 +34,21 @@ namespace Services.Mappers
             return eventDTOs;
         }
 
+        public Event MapEventDTOToEvent(EventDTO eventDTO)
+        {
+            Event newEvent = new Event
+            {
+                EventId = eventDTO.EventId,
+                Title = eventDTO.Title,
+                Description = eventDTO.Description,
+                Location = eventDTO.Location,
+                StartTime = eventDTO.StartTime,
+                EndTime = eventDTO.EndTime,
+            };
+
+            return newEvent;
+        }
+
         public List<UserDTO> MapUserToUserDTO(List<User> users)
         {
             List<UserDTO> userDTOs = new List<UserDTO>();

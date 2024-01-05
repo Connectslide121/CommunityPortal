@@ -60,9 +60,9 @@ namespace Services.Services
             return _mappers.MapNewsToNewsDTOs(news);
         }
 
-        public void AddPost(PostDTO post)/////////////map PostDTO to Post
+        public void AddPost(PostDTO post)
         {
-            _dataContext.Posts.Add(post);
+            _dataContext.Posts.Add(_mappers.MapPostDTOtoPost(post));
             _dataContext.SaveChanges();
         }
 
