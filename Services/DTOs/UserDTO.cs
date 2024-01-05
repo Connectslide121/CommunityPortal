@@ -19,8 +19,6 @@ namespace Services.DTOs
         public string Description { get; set; }
         public List<EventDTO> EventsAttended { get; set; }
         public List<PostDTO> PostHistory { get; set; }
-        public List<NewsCommentDTO> NewsComments { get; set; }
-        public List<BlogCommentDTO> BlogComments { get; set; }
-
+        public List<CommentDTO> Comments { get; set; }
     }
 }

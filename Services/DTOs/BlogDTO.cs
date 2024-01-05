@@ -12,7 +12,5 @@ namespace Services.DTOs
     {
         public int BlogId { get; set; } //Blog
         public BlogCategory BlogCategory { get; set; } //Blog
-        public List<BlogCommentDTO> BlogComments { get; set; } //Blog
-
     }
 }

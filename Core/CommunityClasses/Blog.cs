@@ -25,7 +25,6 @@ namespace Core.CommunityClasses
     {
         public int BlogId { get; set; }
         public BlogCategory Category { get; set; }
-        public List<BlogComment> BlogComments { get; set; }
 
     }
 }

@@ -27,11 +27,11 @@ namespace Services.Mappers
                         PostId = post.PostId,
                         User = MapUserToUserDTO(post.User),
                         Title = post.Title,
-                        Content = post.Content,
+                        PostContent = post.PostContent,
                         Timestamp = post.Timestamp,
                         BlogId = blog.BlogId,
                         BlogCategory = blog.Category,
-                        BlogComments = MapBlogCommentsToBlogCommentDTOs(blog.BlogComments)
+                        Comments = MapCommentsToCommentDTOs(blog.Comments)
                     };
 
                     postDTOs.Add(blogDTO);
@@ -44,11 +44,11 @@ namespace Services.Mappers
                         PostId = post.PostId,
                         User = MapUserToUserDTO(post.User),
                         Title = post.Title,
-                        Content = post.Content,
+                        PostContent = post.PostContent,
                         Timestamp = post.Timestamp,
                         NewsId = news.NewsId,
                         NewsCategory = news.Category,
-                        NewsComments = MapNewsCommentsToNewsCommentDTOs(news.NewsComments)
+                        Comments = MapCommentsToCommentDTOs(news.Comments)
                     };
 
                     postDTOs.Add(newsDTO);
@@ -67,11 +67,11 @@ namespace Services.Mappers
                     PostId = postDTO.PostId,
                     User = MapUserDTOToUser(postDTO.User),
                     Title = postDTO.Title,
-                    Content = postDTO.Content,
+                    PostContent = postDTO.PostContent,
                     Timestamp = postDTO.Timestamp,
                     NewsId = newsDTO.NewsId,
                     Category = newsDTO.NewsCategory,
-                    NewsComments = MapNewsCommentDTOsToNewsComments(newsDTO.NewsComments)
+                    Comments = MapCommentsToCommentDTOs(newsDTO.Comments)
                 };
 
                 return news;
@@ -84,11 +84,11 @@ namespace Services.Mappers
                     PostId = postDTO.PostId,
                     User = MapUserDTOToUser(postDTO.User),
                     Title = postDTO.Title,
-                    Content = postDTO.Content,
+                    PostContent = postDTO.PostContent,
                     Timestamp = postDTO.Timestamp,
                     BlogId = blogDTO.BlogId,
                     Category = blogDTO.BlogCategory,
-                    BlogComments = MapBlogCommentDTOsToBlogComments(blogDTO.BlogComments)
+                    Comments = MapCommentsToCommentDTOs(blogDTO.Comments)
                 };
 
                 return blog;
@@ -228,11 +228,11 @@ namespace Services.Mappers
                     PostId = blog.PostId,
                     User = MapUserToUserDTO(blog.User),
                     Title = blog.Title,
-                    Content = blog.Content,
+                    PostContent = blog.PostContent,
                     Timestamp = blog.Timestamp,
                     BlogId = blog.PostId,
                     BlogCategory = blog.Category,
-                    BlogComments = MapBlogCommentsToBlogCommentDTOs(blog.BlogComments)
+                    Comments = MapCommentsToCommentDTOs(blog.Comments)
                 };
 
                 blogDTOs.Add(blogDTO);
@@ -241,35 +241,35 @@ namespace Services.Mappers
             return blogDTOs;
         }
 
-        public List<BlogCommentDTO> MapBlogCommentsToBlogCommentDTOs(List<BlogComment> blogComments)
+        public List<CommentDTO> MapCommentsToCommentDTOs(List<Comment> comments)
         {
-            List<BlogCommentDTO> blogCommentDTOs = new List<BlogCommentDTO>();
+            List<CommentDTO> CommentDTOs = new List<CommentDTO>();
 
-            foreach (BlogComment blogComment in blogComments)
+            foreach (Comment Comment in comments)
             {
-                BlogCommentDTO blogCommentDTO = new BlogCommentDTO
+                CommentDTO CommentDTO = new CommentDTO
                 {
-                    BlogCommentId = blogComment.BlogCommentId,
-                    Comment = blogComment.Comment,
-                    User = MapUserToUserDTO(blogComment.User),
+                    CommentId = Comment.CommentId,
+                    CommentContent = Comment.CommentContent,
+                    User = MapUserToUserDTO(Comment.User),
                 };
 
-                blogCommentDTOs.Add(blogCommentDTO);
+                CommentDTOs.Add(CommentDTO);
             }
 
-            return blogCommentDTOs;
+            return CommentDTOs;
         }
 
-        public List<BlogComment> MapBlogCommentDTOsToBlogComments(List<BlogCommentDTO> blogCommentDTOs)
+        public List<Comment> MapCommentsToCommentDTOs(List<CommentDTO> blogCommentDTOs)
         {
-            List<BlogComment> blogComments = new List<BlogComment>();
+            List<Comment> blogComments = new List<Comment>();
 
-            foreach (BlogCommentDTO blogCommentDTO in blogCommentDTOs)
+            foreach (CommentDTO blogCommentDTO in blogCommentDTOs)
             {
-                BlogComment blogComment = new BlogComment
+                Comment blogComment = new Comment
                 {
-                    BlogCommentId = blogCommentDTO.BlogCommentId,
-                    Comment = blogCommentDTO.Comment,
+                    CommentId = blogCommentDTO.CommentId,
+                    CommentContent = blogCommentDTO.CommentContent,
                     User = MapUserDTOToUser(blogCommentDTO.User)
                 };
 
@@ -290,54 +290,16 @@ namespace Services.Mappers
                     PostId = news.PostId,
                     User = MapUserToUserDTO(news.User),
                     Title = news.Title,
-                    Content = news.Content,
+                    PostContent = news.PostContent,
                     Timestamp = news.Timestamp,
                     NewsId = news.NewsId,
                     NewsCategory = news.Category,
-                    NewsComments = MapNewsCommentsToNewsCommentDTOs(news.NewsComments)
+                    Comments = MapCommentsToCommentDTOs(news.Comments)
                 };
                 newsDTOs.Add(newsDTO);
             }
 
             return newsDTOs;
-        }
-
-        public List<NewsCommentDTO> MapNewsCommentsToNewsCommentDTOs(List<NewsComment> newsComments)
-        {
-            List<NewsCommentDTO> newsCommentDTOs = new List<NewsCommentDTO>();
-
-            foreach (NewsComment newsComment in newsComments)
-            {
-                NewsCommentDTO newsCommentDTO = new NewsCommentDTO
-                {
-                    NewsCommentId = newsComment.NewsCommentId,
-                    Comment = newsComment.Comment,
-                    User = MapUserToUserDTO(newsComment.User)
-                };
-
-                newsCommentDTOs.Add(newsCommentDTO);
-            }
-
-            return newsCommentDTOs;
-        }
-
-        public List<NewsComment> MapNewsCommentDTOsToNewsComments(List<NewsCommentDTO> newsCommentDTOs)
-        {
-            List<NewsComment> newsComments = new List<NewsComment>();
-
-            foreach (NewsCommentDTO newsCommentDTO in newsCommentDTOs)
-            {
-                NewsComment newsComment = new NewsComment
-                {
-                    NewsCommentId = newsCommentDTO.NewsCommentId,
-                    Comment = newsCommentDTO.Comment,
-                    User = MapUserDTOToUser(newsCommentDTO.User)
-                };
-
-                newsComments.Add(newsComment);
-            }
-
-            return newsComments;
         }
     }
 }

@@ -24,7 +24,5 @@ namespace Core.NewsClasses
     {
         public int NewsId { get; set; }
         public NewsCategory Category { get; set; }
-        public List<NewsComment> NewsComments { get; set; }
-
     }
 }

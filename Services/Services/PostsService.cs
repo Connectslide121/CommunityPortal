@@ -31,8 +31,7 @@ namespace Services.Services
         { 
              List<Post> posts = _dataContext.Posts
                 .Include(p => p.User) 
-                .Include(p => (p as Blog).BlogComments)
-                .Include(p => (p as News).NewsComments)
+                .Include(p => p.Comments)
                 .ToList();
 
             return _mappers.MapPostsToPostDTOs(posts);
@@ -42,7 +41,7 @@ namespace Services.Services
         {
             List<Blog> blogs = _dataContext.Blogs
                 .Include(b => b.User)
-                .Include(b => b.BlogComments)
+                .Include(b => b.Comments)
                     .ThenInclude(c => c.User)
                 .ToList();
 
@@ -53,7 +52,7 @@ namespace Services.Services
         {
             List<News> news = _dataContext.News
                 .Include(n => n.User)
-                .Include(n => n.NewsComments)
+                .Include(n => n.Comments)
                     .ThenInclude(c => c.User)
                 .ToList();
 

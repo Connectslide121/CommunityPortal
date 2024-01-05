@@ -33,8 +33,7 @@ namespace Services.Mappers
                         Description = user.Description,
                         PostHistory = MapPostsToPostDTOs(user.PostHistory),
                         EventsAttended = MapEventsToEventDTOs(user.EventsAttended),
-                        BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments),
-                        NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments),
+                        Comments = MapCommentsToCommentDTOs(user.Comments), 
                         UserExperience = guest.UserExperience
                     };
                     userDTOs.Add(guestDTO);
@@ -52,8 +51,7 @@ namespace Services.Mappers
                         Description = user.Description,
                         PostHistory = MapPostsToPostDTOs(user.PostHistory),
                         EventsAttended = MapEventsToEventDTOs(user.EventsAttended),
-                        BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments),
-                        NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments),
+                        Comments = MapCommentsToCommentDTOs(user.Comments), 
                         AdminTitle = admin.AdminTitle,
                         AdminPrivilegeLevel = admin.AdminPrivilegeLevel
                     };
@@ -72,8 +70,7 @@ namespace Services.Mappers
                         Description = user.Description,
                         PostHistory = MapPostsToPostDTOs(user.PostHistory),
                         EventsAttended = MapEventsToEventDTOs(user.EventsAttended),
-                        BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments),
-                        NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments),
+                        Comments = MapCommentsToCommentDTOs(user.Comments),
                         ModerationExperience = moderator.ModerationExperience,
                         ModerationArea = moderator.ModerationArea,
                     };
@@ -97,8 +94,7 @@ namespace Services.Mappers
                     Description = user.Description,
                     EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
                     PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
-                    NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments), //Write custom mapper for this method
-                    BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments), //Write custom mapper for this method
+                    Comments = MapCommentsToCommentDTOs(user.Comments), //Write custom mapper for this method
                     UserExperience = guest.UserExperience
                 };
 
@@ -116,8 +112,7 @@ namespace Services.Mappers
                     Description = user.Description,
                     EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
                     PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
-                    NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments), //Write custom mapper for this method
-                    BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments), //Write custom mapper for this method
+                    Comments = MapCommentsToCommentDTOs(user.Comments), //Write custom mapper for this method
                     AdminTitle = admin.AdminTitle,
                     AdminPrivilegeLevel = admin.AdminPrivilegeLevel
                 };
@@ -136,8 +131,7 @@ namespace Services.Mappers
                     Description = user.Description,
                     EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
                     PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
-                    NewsComments = MapNewsCommentsToNewsCommentDTOs(user.NewsComments), //Write custom mapper for this method
-                    BlogComments = MapBlogCommentsToBlogCommentDTOs(user.BlogComments), //Write custom mapper for this method
+                    Comments = MapCommentsToCommentDTOs(user.Comments), //Write custom mapper for this method
                     ModerationExperience = moderator.ModerationExperience,
                     ModerationArea = moderator.ModerationArea,
                 };
@@ -182,8 +176,7 @@ namespace Services.Mappers
                     Description = guest.Description,
                     PostHistory = MapPostsToPostDTOs(guest.PostHistory),
                     EventsAttended = MapEventsToEventDTOs(guest.EventsAttended),
-                    BlogComments = MapBlogCommentsToBlogCommentDTOs(guest.BlogComments),
-                    NewsComments = MapNewsCommentsToNewsCommentDTOs(guest.NewsComments)
+                    Comments = MapCommentsToCommentDTOs(guest.Comments),
                 };
                 guestDTO.UserExperience = guest.UserExperience;
 
@@ -209,8 +202,7 @@ namespace Services.Mappers
                     Description = admin.Description,
                     PostHistory = MapPostsToPostDTOs(admin.PostHistory),
                     EventsAttended = MapEventsToEventDTOs(admin.EventsAttended),
-                    BlogComments = MapBlogCommentsToBlogCommentDTOs(admin.BlogComments),
-                    NewsComments = MapNewsCommentsToNewsCommentDTOs(admin.NewsComments)
+                    Comments = MapCommentsToCommentDTOs(admin.Comments),
 
                 };
                 adminDTO.AdminTitle = admin.AdminTitle;
@@ -238,8 +230,7 @@ namespace Services.Mappers
                     Description = moderator.Description,
                     PostHistory = MapPostsToPostDTOs(moderator.PostHistory),
                     EventsAttended = MapEventsToEventDTOs(moderator.EventsAttended),
-                    BlogComments = MapBlogCommentsToBlogCommentDTOs(moderator.BlogComments),
-                    NewsComments = MapNewsCommentsToNewsCommentDTOs(moderator.NewsComments)
+                    Comments = MapCommentsToCommentDTOs(moderator.Comments),
                 };
                 moderatorDTO.ModerationArea = moderator.ModerationArea;
                 moderatorDTO.ModerationExperience = moderator.ModerationExperience;
@@ -262,7 +253,7 @@ namespace Services.Mappers
                     {
                         PostId = post.PostId,
                         Title = post.Title,
-                        Content = post.Content,
+                        PostContent = post.PostContent,
                         Timestamp = post.Timestamp,
                         BlogId = blog.BlogId,
                         BlogCategory = blog.Category
@@ -277,7 +268,7 @@ namespace Services.Mappers
                     {
                         PostId = post.PostId,
                         Title = post.Title,
-                        Content = post.Content,
+                        PostContent = post.PostContent,
                         Timestamp = post.Timestamp,
                         NewsId = news.NewsId,
                         NewsCategory = news.Category,
@@ -290,32 +281,17 @@ namespace Services.Mappers
             return postDTOs;
         }
 
-        public BlogDTO MapBlogToBlogDTO(Blog blog)
+        public PostDTO MapPostToPostDTO(Post post)
         {
-            BlogDTO blogDTO = new BlogDTO
+            PostDTO postDTO = new PostDTO
             {
-                PostId = blog.PostId,
-                BlogId = blog.BlogId,
-                Title = blog.Title,
-                Content = blog.Content,
-                User = MapUserToUserDTO(blog.User)
+                PostId = post.PostId,
+                Title = post.Title,
+                PostContent = post.PostContent,
+                User = MapUserToUserDTO(post.User)
             };
 
-            return blogDTO;
-        }
-
-        public NewsDTO MapNewsToNewsDTO(News news)
-        {
-            NewsDTO newsDTO = new NewsDTO
-            {
-                PostId = news.PostId,
-                NewsId = news.NewsId,
-                Title = news.Title,
-                Content = news.Content,
-                User = MapUserToUserDTO(news.User)
-            };
-
-            return newsDTO;
+            return postDTO;
         }
 
         public List<EventDTO> MapEventsToEventDTOs(List<Event> events)
@@ -340,36 +316,17 @@ namespace Services.Mappers
             return eventDTOs;
         }
 
-        public List<BlogCommentDTO> MapBlogCommentsToBlogCommentDTOs(List<BlogComment> comments)
+        public List<CommentDTO> MapCommentsToCommentDTOs(List<Comment> comments)
         {
-            List<BlogCommentDTO> commentsDTO = new List<BlogCommentDTO>();
+            List<CommentDTO> commentsDTO = new List<CommentDTO>();
 
-            foreach (BlogComment comment in comments)
+            foreach (Comment comment in comments)
             {
-                BlogCommentDTO commentDTO = new BlogCommentDTO
+                CommentDTO commentDTO = new CommentDTO
                 {
-                    BlogCommentId = comment.BlogCommentId,
-                    Comment = comment.Comment,
-                    Blog = MapBlogToBlogDTO(comment.Blog)
-                };
-
-                commentsDTO.Add(commentDTO);
-            }
-
-            return commentsDTO;
-        }
-
-        public List<NewsCommentDTO> MapNewsCommentsToNewsCommentDTOs(List<NewsComment> comments)
-        {
-            List<NewsCommentDTO> commentsDTO = new List<NewsCommentDTO>();
-
-            foreach (NewsComment comment in comments)
-            {
-                NewsCommentDTO commentDTO = new NewsCommentDTO
-                {
-                    NewsCommentId = comment.NewsCommentId,
-                    Comment = comment.Comment,
-                    News = MapNewsToNewsDTO(comment.News)
+                    CommentId = comment.CommentId,
+                    CommentContent = comment.CommentContent,
+                    Post = MapPostToPostDTO(comment.Post)
                 };
 
                 commentsDTO.Add(commentDTO);

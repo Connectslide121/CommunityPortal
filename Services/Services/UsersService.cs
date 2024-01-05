@@ -32,8 +32,7 @@ namespace Services.Services
             List<User> users = _dataContext.Users
                 .Include(u => u.PostHistory)
                 .Include(u => u.EventsAttended)
-                .Include(u => u.BlogComments)
-                .Include(u => u.NewsComments)
+                .Include(u => u.Comments)
                 .ToList();
 
             return _mapper.MapUsersToUserDTOs(users);
@@ -45,10 +44,8 @@ namespace Services.Services
                 .Where(u => u.UserId == userId)
                 .Include(u => u.PostHistory)
                 .Include(u => u.EventsAttended)
-                .Include(u => u.BlogComments)
-                    .ThenInclude(c => c.Blog) 
-                .Include(u => u.NewsComments)
-                    .ThenInclude(c => c.News)
+                .Include(u => u.Comments)
+                    .ThenInclude(c => c.Post) 
                 .FirstOrDefault();
 
             return _mapper.MapUserToUserDTO(user);
@@ -59,12 +56,9 @@ namespace Services.Services
             List<Guest> guests = _dataContext.Guests
                 .Include(g => g.PostHistory)
                 .Include(g => g.EventsAttended)
-                .Include(g => g.BlogComments)
-                    .ThenInclude(c => c.Blog)
+                .Include(g => g.Comments)
+                    .ThenInclude(c => c.Post)
                         .ThenInclude(b => b.User)
-                .Include(g => g.NewsComments)
-                    .ThenInclude(c => c.News)
-                        .ThenInclude(n => n.User)
                 .ToList();
 
             return _mapper.MapGuestsToGuestDTOs(guests);
@@ -75,12 +69,9 @@ namespace Services.Services
             List<Admin> admins = _dataContext.Admins
                 .Include(a => a.PostHistory)
                 .Include(a => a.EventsAttended)
-                .Include(a => a.BlogComments)
-                    .ThenInclude(c => c.Blog)
+                .Include(a => a.Comments)
+                    .ThenInclude(c => c.Post)
                         .ThenInclude(b => b.User)
-                .Include(a => a.NewsComments)
-                    .ThenInclude(c => c.News)
-                        .ThenInclude(n => n.User)
                 .ToList();
 
             return _mapper.MapAdminsToAdminDTOs(admins);
@@ -91,12 +82,9 @@ namespace Services.Services
             List<Moderator> moderators = _dataContext.Moderators
                 .Include(m => m.PostHistory)
                 .Include(m => m.EventsAttended)
-                .Include(m => m.BlogComments)
-                    .ThenInclude(c => c.Blog)
+                .Include(m => m.Comments)
+                    .ThenInclude(c => c.Post)
                         .ThenInclude(b => b.User)
-                .Include(m => m.NewsComments)
-                    .ThenInclude(c => c.News)
-                        .ThenInclude(n => n.User)
                 .ToList();
 
             return _mapper.MapModeratorsToModeratorDTOs(moderators);

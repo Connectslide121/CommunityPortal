@@ -21,10 +21,9 @@ namespace DataBaseConnection
         public DbSet<Moderator> Moderators { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Blog> Blogs { get; set; }
-        public DbSet<BlogComment> BlogComments { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<News> News { get; set; }
-        public DbSet<NewsComment> NewsComments { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
     }
 }

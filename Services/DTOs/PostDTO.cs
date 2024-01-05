@@ -13,7 +13,8 @@ namespace Services.DTOs
         public int PostId { get; set; }
         public UserDTO User { get; set; }
         public string Title { get; set; }
-        public string Content { get; set; }
+        public string PostContent { get; set; }
         public DateTime Timestamp { get; set; }
+        public List<CommentDTO> Comments { get; set; } //Blog
     }
 }

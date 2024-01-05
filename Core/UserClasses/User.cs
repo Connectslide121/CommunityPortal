@@ -19,7 +19,6 @@ namespace Core.UserClasses
         public string Description { get; set; }
         public List<Post> PostHistory { get; set; }
         public List<Event> EventsAttended { get; set; }
-        public List<NewsComment> NewsComments { get; set; }
-        public List<BlogComment> BlogComments { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

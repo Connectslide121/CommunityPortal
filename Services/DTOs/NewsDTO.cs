@@ -10,9 +10,7 @@ namespace Services.DTOs
 {
     public class NewsDTO : PostDTO
     {
-        public int NewsId { get; set; } //News
-        public NewsCategory NewsCategory { get; set; } //News
-        public List<NewsCommentDTO> NewsComments { get; set; } //News
-
+        public int NewsId { get; set; }
+        public NewsCategory NewsCategory { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace API.Controllers
             _eventsService = eventsService;
         }
 
-        [HttpGet("events")]
+        [HttpGet("all")]
 
         public IActionResult GetEvents()
         {

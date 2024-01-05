@@ -23,7 +23,7 @@ namespace API.Controllers
         }
 
 
-        [HttpGet("posts")]
+        [HttpGet("all")]
         public IActionResult GetPosts()
         {
             List<PostDTO> posts = _postsService.GetPosts();
