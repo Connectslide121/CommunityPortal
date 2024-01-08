@@ -34,7 +34,7 @@ namespace Services.Services
             return _mappers.MapEventsToEventDTOs(events);
         }
 
-        public EventDTO GetEventById(int eventId)
+        public EventDTO GetEventById(int eventId)//************Handle NULL exception????? make sure that this UserID always exists.
         {
             Event? evnt = _dataContext.Events
                 .Where(u => u.EventId == eventId)

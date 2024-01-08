@@ -88,13 +88,7 @@ namespace API.Controllers
         {
             bool userDeleted = _usersService.DeleteUser(userId);
 
-            if (!userDeleted)
-            {
-                return NotFound();
-            }
-
-            return Ok(userId);
+            return userDeleted == false ? NotFound() : Ok(userId);
         }
-
     }
 }

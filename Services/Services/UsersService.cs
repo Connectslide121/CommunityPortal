@@ -44,6 +44,7 @@ namespace Services.Services
             User? user = _dataContext.Users
                 .Where(u => u.UserId == userId)
                 .Include(u => u.PostHistory)
+                    .ThenInclude(p => p.Comments)
                 .Include(u => u.EventsAttended)
                 .Include(u => u.Comments)
                     .ThenInclude(c => c.Post) 
@@ -102,7 +103,6 @@ namespace Services.Services
             User newUser = _mappers.MapUserDTOToUser(userDTO); 
             User? existingUser = _dataContext.Users.Find(userDTO.UserId);
             bool userExists = false;
-
 
             if (existingUser != null)
             {

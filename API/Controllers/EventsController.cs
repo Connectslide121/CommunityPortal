@@ -66,12 +66,7 @@ namespace API.Controllers
         {
             bool eventDeleted = _eventsService.DeleteEvent(eventId);
 
-            if (!eventDeleted)
-            {
-                return NotFound();
-            }
-
-            return Ok(eventId);
+            return eventDeleted == false ? NotFound() : Ok(eventId);
         }
 
     }

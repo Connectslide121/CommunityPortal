@@ -37,7 +37,7 @@ namespace Services.Services
             return _mappers.MapCommentsToCommentDTOs(comments);
         }
 
-        public CommentDTO GetCommentById(int commentId)
+        public CommentDTO GetCommentById(int commentId)//************Handle NULL exception????? make sure that this UserID always exists.
         {
             Comment? comment = _dataContext.Comments
                 .Where(c => c.CommentId == commentId)

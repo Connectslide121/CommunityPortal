@@ -37,7 +37,7 @@ namespace Services.Services
             return _mappers.MapPostsToPostDTOs(posts);
         }
 
-        public PostDTO GetPostById(int postId)
+        public PostDTO GetPostById(int postId)//************Handle NULL exception????? make sure that this UserID always exists.
         {
             Post? post = _dataContext.Posts
                 .Where(u => u.PostId == postId)

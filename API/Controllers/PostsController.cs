@@ -83,12 +83,7 @@ namespace API.Controllers
         {
             bool postDeleted = _postsService.DeletePost(postId);
 
-            if (!postDeleted)
-            {
-                return NotFound();
-            }
-
-            return Ok(postId);
+            return postDeleted == false ? NotFound() : Ok(postId);
         }
 
     }

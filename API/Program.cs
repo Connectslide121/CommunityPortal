@@ -1,21 +1,16 @@
 using DataBaseConnection;
 using Microsoft.EntityFrameworkCore;
-using Services;
 using Services.Interfaces;
 using Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 IConfigurationRoot Configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")

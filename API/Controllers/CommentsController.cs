@@ -66,12 +66,7 @@ namespace API.Controllers
         {
             bool commentDeleted = _commentsService.DeleteComment(commentId);
 
-            if (!commentDeleted)
-            {
-                return NotFound();
-            }
-
-            return Ok(commentId);
+            return commentDeleted == false ? NotFound() : Ok(commentId);
         }
 
     }
