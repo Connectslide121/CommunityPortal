@@ -46,19 +46,9 @@ namespace API.Controllers
         [HttpPut("update/{id}")]
         public IActionResult UpdateComment(int commentId, CommentDTO updatedComment)/////Is this a better approach than the above?  PROBABLY
         {
-            if (updatedComment == null || commentId != updatedComment.CommentId)
-            {
-                return BadRequest("Invalid data");
-            }
-
             bool commentUpdated = _commentsService.UpdateComment(updatedComment);
 
-            if (!commentUpdated)
-            {
-                return NotFound();
-            }
-
-            return Ok(updatedComment);
+            return commentUpdated == false ? NotFound() : Ok(updatedComment);
         }
 
         [HttpDelete("delete/{id}")]

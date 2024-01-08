@@ -46,19 +46,9 @@ namespace API.Controllers
         [HttpPut("update/{id}")]
         public IActionResult UpdateEvent(int id, EventDTO updatedEvent)/////Is this a better approach than the above?  PROBABLY
         {
-            if (updatedEvent == null || id != updatedEvent.EventId)
-            {
-                return BadRequest("Invalid data");
-            }
-
             bool eventUpdated = _eventsService.UpdateEvent(updatedEvent);
 
-            if (!eventUpdated)
-            {
-                return NotFound();
-            }
-
-            return Ok(updatedEvent);
+            return eventUpdated == false ? NotFound() : Ok(updatedEvent);
         }
 
         [HttpDelete("delete/{id}")]

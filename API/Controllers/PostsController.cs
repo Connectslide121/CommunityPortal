@@ -63,19 +63,9 @@ namespace API.Controllers
         [HttpPut("update/{id}")]
         public IActionResult UpdatePost(int id, PostDTO updatedPost)/////Is this a better approach than the above?  PROBABLY
         {
-            if (updatedPost == null || id != updatedPost.PostId)
-            {
-                return BadRequest("Invalid data");
-            }
-
             bool postUpdated = _postsService.UpdatePost(updatedPost);
 
-            if (!postUpdated)
-            {
-                return NotFound();
-            }
-
-            return Ok(updatedPost);
+            return postUpdated == false ? NotFound() : Ok(updatedPost);
         }
 
         [HttpDelete("delete/{id}")]
