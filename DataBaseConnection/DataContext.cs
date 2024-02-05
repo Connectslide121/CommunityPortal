@@ -9,10 +9,11 @@ using Core.NewsClasses;
 using Core.CommunityClasses;
 using Core.UserClasses;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace DataBaseConnection
 {
-    public class DataContext : IdentityDbContext<ApplicationUser>
+    public class DataContext : IdentityDbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
