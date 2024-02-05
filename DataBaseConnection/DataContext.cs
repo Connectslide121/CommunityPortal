@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using Core.NewsClasses;
 using Core.CommunityClasses;
 using Core.UserClasses;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DataBaseConnection
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
