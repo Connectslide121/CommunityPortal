@@ -15,24 +15,31 @@ namespace API.Controllers
     {
         private readonly IUsersService _usersService;
 
-        public UsersController(IUsersService usersService) 
+        public UsersController(IUsersService usersService)
         {
             _usersService = usersService;
         }
 
 
         [HttpGet("all")]
-        public IActionResult GetUsers() 
-        { 
+        public IActionResult GetUsers()
+        {
             List<UserDTO> users = _usersService.GetUsers();
             return users == null ? NotFound() : Ok(users);
         }
 
         [HttpGet("guests")]
-        public IActionResult GetGuests() 
-        { 
+        public IActionResult GetGuests()
+        {
             List<GuestDTO> guests = _usersService.GetGuests();
             return guests == null ? NotFound() : Ok(guests);
+        }
+
+        [HttpGet("{email}")]
+        public IActionResult GetUserByEmail(string email) 
+        {
+            UserDTO user = _usersService.GetUserByEmail(email);
+            return user == null ? NotFound() : Ok(user);
         }
 
         [HttpGet("admins")]
@@ -49,12 +56,6 @@ namespace API.Controllers
             return moderators == null ? NotFound() : Ok(moderators);
         }
 
-        [HttpGet("user/{id}")]
-        public IActionResult GetUserById(int userId)
-        {
-            UserDTO userById = _usersService.GetUserById(userId);
-            return userById == null ? NotFound() : Ok(userById);
-        }
 
         [HttpPost("create")]
 

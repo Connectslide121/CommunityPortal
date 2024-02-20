@@ -39,15 +39,13 @@ namespace Services.Services
             return _mappers.MapUsersToUserDTOs(users);
         }
 
-        public UserDTO GetUserById(int userId) //************Handle NULL exception????? make sure that this UserID always exists.
+        public UserDTO GetUserByEmail(string email)
         {
             User? user = _dataContext.Users
-                .Where(u => u.UserId == userId)
-                .Include(u => u.PostHistory)
-                    .ThenInclude(p => p.Comments)
-                .Include(u => u.EventsAttended)
-                .Include(u => u.Comments)
-                    .ThenInclude(c => c.Post) 
+                .Where(u => u.Email == email)
+                .Include(a => a.PostHistory)
+                .Include(a => a.EventsAttended)
+                .Include(a => a.Comments)
                 .FirstOrDefault();
 
             return _mappers.MapUserToUserDTO(user);

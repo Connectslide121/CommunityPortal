@@ -1,6 +1,8 @@
+using Core.UserClasses;
 using DataBaseConnection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Services.Interfaces;
 using Services.Services;
@@ -30,7 +32,7 @@ var serverVersion = new MySqlServerVersion(new Version(8, 0, 35));//*********The
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseMySql(connectionString, serverVersion));
 
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+builder.Services.AddIdentityApiEndpoints<User>()
     .AddEntityFrameworkStores<DataContext>();
 
 //Connect IDataService to DataService
@@ -48,7 +50,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapIdentityApi<IdentityUser>();
+app.MapPost("/logout", async (SignInManager<User> signInManager,
+    [FromBody] object empty) =>
+{
+    if (empty != null)
+    {
+        await signInManager.SignOutAsync();
+        return Results.Ok();
+    }
+    return Results.Unauthorized();
+})
+.RequireAuthorization();
+
+
+app.MapIdentityApi<User>();
 
 app.UseHttpsRedirection();
 

@@ -89,8 +89,8 @@ namespace Services.Mappers
         {
             UserDTO userDTO = new UserDTO
             {
-                UserId = user.UserId,
-                UserName = user.UserName,
+                UserId = user.Id,
+                UserName = user.Name,
                 Email = user.Email,
                 ProfilePicturePath = user.ProfilePicturePath,
                 Description = user.Description,
@@ -103,8 +103,8 @@ namespace Services.Mappers
         {
             User user = new User
             {
-                UserId = userDTO.UserId,
-                UserName = userDTO.UserName,
+                Id = userDTO.UserId,
+                Name = userDTO.UserName,
                 Email = userDTO.Email,
                 ProfilePicturePath = userDTO.ProfilePicturePath,
                 Description = userDTO.Description,

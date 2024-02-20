@@ -148,9 +148,9 @@ namespace Services.Mappers
             {
                 GuestDTO guestDTO = new GuestDTO
                 {
-                    UserId = user.UserId,
-                    UserName = user.UserName,
-                    Password = user.Password,
+                    UserId = user.Id,
+                    UserName = user.Name,
+                    Password = user.PasswordHash,
                     Email = user.Email,
                     ProfilePicturePath = user.ProfilePicturePath,
                     Description = user.Description,
@@ -164,9 +164,9 @@ namespace Services.Mappers
             {
                 AdminDTO adminDTO = new AdminDTO
                 {
-                    UserId = user.UserId,
-                    UserName = user.UserName,
-                    Password = user.Password,
+                    UserId = user.Id,
+                    UserName = user.Name,
+                    Password = user.PasswordHash,
                     Email = user.Email,
                     ProfilePicturePath = user.ProfilePicturePath,
                     Description = user.Description,
@@ -181,9 +181,9 @@ namespace Services.Mappers
             {
                 ModeratorDTO moderatorDTO = new ModeratorDTO
                 {
-                    UserId = user.UserId,
-                    UserName = user.UserName,
-                    Password = user.Password,
+                    UserId = user.Id,
+                    UserName = user.Name,
+                    Password = user.PasswordHash,
                     Email = user.Email,
                     ProfilePicturePath = user.ProfilePicturePath,
                     Description = user.Description,
@@ -206,9 +206,9 @@ namespace Services.Mappers
             {
                 Guest guest = new Guest
                 {
-                    UserId = userDTO.UserId,
-                    UserName = userDTO.UserName,
-                    Password = userDTO.Password,
+                    Id = userDTO.UserId,
+                    Name = userDTO.UserName,
+                    PasswordHash = userDTO.Password,
                     Email = userDTO.Email,
                     ProfilePicturePath = userDTO.ProfilePicturePath,
                     Description = userDTO.Description,
@@ -222,9 +222,9 @@ namespace Services.Mappers
             {
                 Admin admin = new Admin
                 {
-                    UserId = userDTO.UserId,
-                    UserName = userDTO.UserName,
-                    Password = userDTO.Password,
+                    Id = userDTO.UserId,
+                    Name = userDTO.UserName,
+                    PasswordHash = userDTO.Password,
                     Email = userDTO.Email,
                     ProfilePicturePath = userDTO.ProfilePicturePath,
                     Description = userDTO.Description,
@@ -239,9 +239,9 @@ namespace Services.Mappers
             {
                 Moderator moderator = new Moderator
                 {
-                    UserId = userDTO.UserId,
-                    UserName = userDTO.UserName,
-                    Password = userDTO.Password,
+                    Id = userDTO.UserId,
+                    Name = userDTO.UserName,
+                    PasswordHash = userDTO.Password,
                     Email = userDTO.Email,
                     ProfilePicturePath = userDTO.ProfilePicturePath,
                     Description = userDTO.Description,
