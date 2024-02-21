@@ -26,13 +26,10 @@ namespace Services.Mappers
                     GuestDTO guestDTO = new GuestDTO
                     {
                         UserId = user.Id,
-                        UserName = user.Name,
+                        UserName = user.UserName,
                         Email = user.Email,
                         ProfilePicturePath = user.ProfilePicturePath,
                         Description = user.Description,
-                        PostHistory = MapPostsToPostDTOs(user.PostHistory),
-                        EventsAttended = MapEventsToEventDTOs(user.EventsAttended),
-                        Comments = MapCommentsToCommentDTOs(user.Comments), 
                         UserExperience = guest.UserExperience
                     };
                     userDTOs.Add(guestDTO);
@@ -43,13 +40,10 @@ namespace Services.Mappers
                     AdminDTO adminDTO = new AdminDTO
                     {
                         UserId = user.Id,
-                        UserName = user.Name,
+                        UserName = user.UserName,
                         Email = user.Email,
                         ProfilePicturePath = user.ProfilePicturePath,
                         Description = user.Description,
-                        PostHistory = MapPostsToPostDTOs(user.PostHistory),
-                        EventsAttended = MapEventsToEventDTOs(user.EventsAttended),
-                        Comments = MapCommentsToCommentDTOs(user.Comments), 
                         AdminTitle = admin.AdminTitle,
                         AdminPrivilegeLevel = admin.AdminPrivilegeLevel
                     };
@@ -61,13 +55,10 @@ namespace Services.Mappers
                     ModeratorDTO moderatorDTO = new ModeratorDTO
                     {
                         UserId = user.Id,
-                        UserName = user.Name,
+                        UserName = user.UserName,
                         Email = user.Email,
                         ProfilePicturePath = user.ProfilePicturePath,
                         Description = user.Description,
-                        PostHistory = MapPostsToPostDTOs(user.PostHistory),
-                        EventsAttended = MapEventsToEventDTOs(user.EventsAttended),
-                        Comments = MapCommentsToCommentDTOs(user.Comments),
                         ModerationExperience = moderator.ModerationExperience,
                         ModerationArea = moderator.ModerationArea,
                     };
@@ -85,13 +76,10 @@ namespace Services.Mappers
                 GuestDTO guestDTO = new GuestDTO
                 {
                     UserId = user.Id,
-                    UserName = user.Name,
+                    UserName = user.UserName,
                     Email = user.Email,
                     ProfilePicturePath = user.ProfilePicturePath,
                     Description = user.Description,
-                    EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
-                    PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
-                    Comments = MapCommentsToCommentDTOs(user.Comments), //Write custom mapper for this method
                     UserExperience = guest.UserExperience
                 };
 
@@ -103,13 +91,10 @@ namespace Services.Mappers
                 AdminDTO adminDTO = new AdminDTO
                 {
                     UserId = user.Id,
-                    UserName = user.Name,
+                    UserName = user.UserName,
                     Email = user.Email,
                     ProfilePicturePath = user.ProfilePicturePath,
                     Description = user.Description,
-                    EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
-                    PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
-                    Comments = MapCommentsToCommentDTOs(user.Comments), //Write custom mapper for this method
                     AdminTitle = admin.AdminTitle,
                     AdminPrivilegeLevel = admin.AdminPrivilegeLevel
                 };
@@ -122,13 +107,10 @@ namespace Services.Mappers
                 ModeratorDTO moderatorDTO = new ModeratorDTO
                 {
                     UserId = user.Id,
-                    UserName = user.Name,
+                    UserName = user.UserName,
                     Email = user.Email,
                     ProfilePicturePath = user.ProfilePicturePath,
                     Description = user.Description,
-                    EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
-                    PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
-                    Comments = MapCommentsToCommentDTOs(user.Comments), //Write custom mapper for this method
                     ModerationExperience = moderator.ModerationExperience,
                     ModerationArea = moderator.ModerationArea,
                 };
@@ -141,13 +123,10 @@ namespace Services.Mappers
                 GuestDTO guestDTO = new GuestDTO
                 {
                     UserId = user.Id,
-                    UserName = user.Name,
+                    UserName = user.UserName,
                     Email = user.Email,
                     ProfilePicturePath = user.ProfilePicturePath,
                     Description = user.Description,
-                    EventsAttended = MapEventsToEventDTOs(user.EventsAttended), //Write custom mapper for this method
-                    PostHistory = MapPostsToPostDTOs(user.PostHistory), //Write custom mapper for this method
-                    Comments = MapCommentsToCommentDTOs(user.Comments), //Write custom mapper for this method
                     UserExperience = 0
                 };
 
@@ -160,7 +139,7 @@ namespace Services.Mappers
             UserDTO userDTO = new UserDTO
             {
                 UserId = user.Id,
-                UserName = user.Name,
+                UserName = user.UserName,
                 Email = user.Email,
                 ProfilePicturePath = user.ProfilePicturePath,
                 Description = user.Description,
@@ -174,7 +153,7 @@ namespace Services.Mappers
             User user = new User
             {
                 Id = userDTO.UserId,
-                Name = userDTO.UserName,
+                UserName = userDTO.UserName,
                 Email = userDTO.Email,
                 ProfilePicturePath = userDTO.ProfilePicturePath,
                 Description = userDTO.Description,
@@ -193,13 +172,10 @@ namespace Services.Mappers
                 GuestDTO guestDTO = new GuestDTO
                 {
                     UserId = guest.Id,
-                    UserName = guest.Name,
+                    UserName = guest.UserName,
                     Email = guest.Email,
                     ProfilePicturePath = guest.ProfilePicturePath,
                     Description = guest.Description,
-                    PostHistory = MapPostsToPostDTOs(guest.PostHistory),
-                    EventsAttended = MapEventsToEventDTOs(guest.EventsAttended),
-                    Comments = MapCommentsToCommentDTOs(guest.Comments),
                 };
                 guestDTO.UserExperience = guest.UserExperience;
 
@@ -218,14 +194,10 @@ namespace Services.Mappers
                 AdminDTO adminDTO = new AdminDTO
                 {
                     UserId = admin.Id,
-                    UserName = admin.Name,
+                    UserName = admin.UserName,
                     Email = admin.Email,
                     ProfilePicturePath = admin.ProfilePicturePath,
                     Description = admin.Description,
-                    PostHistory = MapPostsToPostDTOs(admin.PostHistory),
-                    EventsAttended = MapEventsToEventDTOs(admin.EventsAttended),
-                    Comments = MapCommentsToCommentDTOs(admin.Comments),
-
                 };
                 adminDTO.AdminTitle = admin.AdminTitle;
                 adminDTO.AdminPrivilegeLevel = admin.AdminPrivilegeLevel;
@@ -245,13 +217,10 @@ namespace Services.Mappers
                 ModeratorDTO moderatorDTO = new ModeratorDTO
                 {
                     UserId = moderator.Id,
-                    UserName = moderator.Name,
+                    UserName = moderator.UserName,
                     Email = moderator.Email,
                     ProfilePicturePath = moderator.ProfilePicturePath,
                     Description = moderator.Description,
-                    PostHistory = MapPostsToPostDTOs(moderator.PostHistory),
-                    EventsAttended = MapEventsToEventDTOs(moderator.EventsAttended),
-                    Comments = MapCommentsToCommentDTOs(moderator.Comments),
                 };
                 moderatorDTO.ModerationArea = moderator.ModerationArea;
                 moderatorDTO.ModerationExperience = moderator.ModerationExperience;

@@ -96,23 +96,29 @@ namespace Services.Services
             _dataContext.SaveChanges();
         }
 
-        public bool UpdateUser(UserDTO userDTO)//////Is this a good approach with the bool????????
-        {
-            User newUser = _mappers.MapUserDTOToUser(userDTO); 
-            User? existingUser = _dataContext.Users.Find(userDTO.UserId);
+public bool UpdateUser(UserDTO userDTO)
+{
+
+    User? existingUser = _dataContext.Users.Find(userDTO.UserId);
+
             bool userExists = false;
 
-            if (existingUser != null)
-            {
-                _dataContext.Entry(existingUser).CurrentValues.SetValues(newUser);
-                _dataContext.SaveChanges();
-                userExists = true;
-            }
+    if (existingUser != null)
+    {
+        if (userDTO.UserName != null)
+            existingUser.UserName = userDTO.UserName;
+        if (userDTO.ProfilePicturePath != null)
+            existingUser.ProfilePicturePath = userDTO.ProfilePicturePath;
+        if (userDTO.Description != null)
+            existingUser.Description = userDTO.Description;
+        
+        _dataContext.SaveChanges();
+        userExists = true;
+    }
 
-            return userExists;
-        }
-
-        public bool DeleteUser(int userId)//////Is this a good approach with the bool????????
+    return userExists;
+}
+        public bool DeleteUser(string userId)//////Is this a good approach with the bool????????
         {
             var userToDelete = _dataContext.Users.Find(userId);
             bool userExists = false;

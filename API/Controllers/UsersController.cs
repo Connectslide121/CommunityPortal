@@ -1,4 +1,6 @@
-﻿using Core.UserClasses;
+﻿using API.InputModels;
+using API.Mappers;
+using Core.UserClasses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -14,10 +16,12 @@ namespace API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUsersService _usersService;
+        private readonly UserControllerMappers _mappers;
 
         public UsersController(IUsersService usersService)
         {
             _usersService = usersService;
+            _mappers = new UserControllerMappers();
         }
 
 
@@ -67,15 +71,17 @@ namespace API.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public IActionResult UpdateUser(int id, UserDTO updatedUser)/////Is this a better approach than the above?  PROBABLY
+        public IActionResult UpdateUser(UserUpdateModel updatedUser)/////Is this a better approach than the above?  PROBABLY
         {
-            bool userUpdated = _usersService.UpdateUser(updatedUser);
+            UserDTO userDTO = _mappers.MapUserUpdateModelToUserDTO(updatedUser);
+
+            bool userUpdated = _usersService.UpdateUser(userDTO);
 
             return userUpdated == false ? NotFound() : Ok(updatedUser);
         }
 
         [HttpDelete("delete/{id}")]
-        public IActionResult DeleteUser(int userId)
+        public IActionResult DeleteUser(string userId)
         {
             bool userDeleted = _usersService.DeleteUser(userId);
 

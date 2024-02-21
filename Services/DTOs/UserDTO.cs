@@ -13,12 +13,8 @@ namespace Services.DTOs
     {
         public string UserId { get; set; }
         public string UserName { get; set; }
-        public string Password { get; set; }
         public string Email { get; set; }
         public string ProfilePicturePath { get; set; }
         public string Description { get; set; }
-        public List<EventDTO> EventsAttended { get; set; }
-        public List<PostDTO> PostHistory { get; set; }
-        public List<CommentDTO> Comments { get; set; }
     }
 }

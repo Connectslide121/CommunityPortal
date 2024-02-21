@@ -12,7 +12,6 @@ namespace Core.UserClasses
 {
     public class User : IdentityUser
     {
-        public string Name { get; set; }
         public string ProfilePicturePath { get; set; }
         public string Description { get; set; }
         public List<Post> PostHistory { get; set; }

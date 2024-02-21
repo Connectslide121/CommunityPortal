@@ -17,6 +17,6 @@ namespace Services.Interfaces
         List<ModeratorDTO> GetModerators();
         void AddUser(UserDTO newUser);
         bool UpdateUser(UserDTO userToUpdate);
-        bool DeleteUser(int userId);
+        bool DeleteUser(string userId);
     }
 }

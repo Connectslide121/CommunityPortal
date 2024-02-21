@@ -73,7 +73,7 @@ namespace Services.Mappers
                 UserDTO userDTO = new UserDTO
                 {
                     UserId = user.Id,
-                    UserName = user.Name,
+                    UserName = user.UserName,
                     Email = user.Email,
                     ProfilePicturePath = user.ProfilePicturePath,
                     Description = user.Description,
